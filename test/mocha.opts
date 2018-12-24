@@ -1,0 +1,6 @@
+--compilers js:babel-register 
+--require babel-register
+--require test/helpers.js 
+--require test/dom.js
+--require test/setup.js
+src/**/*.spec.js
