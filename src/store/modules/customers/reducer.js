@@ -6,10 +6,39 @@ import * as selectors from './selectors'
 function customerReducer(state = INITIAL_STATE, action) {
 	switch (action.type) {
 
+		/* SAVE */
+		case ActionTypes.SAVE_CUSTOMER_REQUEST:
+			return {
+				...state,
+				isSavingCustomer: true,
+			}
+
+		case ActionTypes.SAVE_CUSTOMER_SUCCESS:
+			return {
+				...state,
+				isSavingCustomer: false,
+				error: null
+			}
+
+		case ActionTypes.SAVE_CUSTOMER_FAILURE:
+			return {
+				...state,
+				isSavingCustomer: false,
+				error: { ...action.payload.error }
+			}
+
+
+		/* LOAD */
 		case ActionTypes.LOAD_CUSTOMERS_REQUEST:
 			return {
 				...state,
 				customers: [],
+				isLoadingCustomers: true,
+			}
+
+		case ActionTypes.RELOAD_CUSTOMERS_REQUEST:
+			return {
+				...state,
 				isLoadingCustomers: true,
 			}
 
@@ -28,109 +57,56 @@ function customerReducer(state = INITIAL_STATE, action) {
 				error: { ...action.payload.error }
 			}
 
+		/* UPDATE */
+		case ActionTypes.SELECT_CUSTOMER_TO_UPDATE:
 
-
-
-		case ActionTypes.LOAD_BOOK_REQUEST:
 			return {
 				...state,
-				detailsBook: {},
-				isLoadingDetailsBook: true
+				editingCustomer: { ...action.payload.customer }
 			}
 
-		case ActionTypes.LOAD_BOOK_SUCCESS:
+		case ActionTypes.UPDATE_CUSTOMER_REQUEST:
 			return {
 				...state,
-				bookMessage: '',
-				error: null,
-				detailsBook: { ...action.payload.book },
-				isLoadingDetailsBook: false
+				isSavingCustomer: true,
 			}
 
-		case ActionTypes.LOAD_BOOK_FAILURE:
+		case ActionTypes.UPDATE_CUSTOMER_SUCCESS:
 			return {
 				...state,
-				isLoadingDetailsBook: false,
-				error: { ...action.payload.error }
-			}
-
-		case ActionTypes.SAVE_BOOKS_REQUEST:
-			return {
-				...state,
-				isSavingBook: true
-			}
-
-		case ActionTypes.SAVE_BOOKS_SUCCESS:
-			return {
-				...state,
-				isSavingBook: true,
-				editingBookMode: false,
+				isSavingCustomer: false,
+				editingCustomer: null,
 				error: null
 			}
 
-		case ActionTypes.SAVE_BOOKS_FAILURE:
+		case ActionTypes.UPDATE_CUSTOMER_FAILURE:
 			return {
 				...state,
-				isSavingBook: false,
+				isSavingCustomer: false,
 				error: { ...action.payload.error }
 			}
 
 
-		case ActionTypes.SELECT_BOOK_TO_UPDATE:
+		/* DELETE */
+		case ActionTypes.DELETE_CUSTOMER_REQUEST:
 			return {
 				...state,
-				editingBook: { ...action.payload.book },
-				editingBookMode: true,
+				isDeletingCustomer: true,
 			}
 
-
-		case ActionTypes.UPDATE_BOOK_REQUEST:
+		case ActionTypes.DELETE_CUSTOMER_SUCCESS:
 			return {
 				...state,
-				isSavingBook: true,
-				bookMessage: '',
-				detailsBook: { ...action.payload.book },
-			}
-
-		case ActionTypes.UPDATE_BOOK_SUCCESS:
-			return {
-				...state,
-				isSavingBook: false,
-				editingBookMode: false,
-				bookMessage: 'Status de Leitura alterado com sucesso!',
+				isDeletingCustomer: false,
 				error: null
 			}
 
-		case ActionTypes.UPDATE_BOOK_FAILURE:
+		case ActionTypes.DELETE_CUSTOMER_FAILURE:
 			return {
 				...state,
-				isSavingBook: false,
-				bookMessage: 'Ops, não conseguimos altrar o status da litura',
+				isDeletingCustomer: false,
 				error: { ...action.payload.error }
 			}
-
-
-		case ActionTypes.DELETE_BOOK_REQUEST:
-			return {
-				...state,
-				isDeletingBook: true,
-			}
-
-		case ActionTypes.DELETE_BOOK_SUCCESS:
-			return {
-				...state,
-				isDeletingBook: false,
-				detailsBook: {},
-				error: null
-			}
-
-		case ActionTypes.DELETE_BOOK_FAILURE:
-			return {
-				...state,
-				isDeletingBook: false,
-				error: { ...action.payload.error }
-			}
-
 
 		default:
 			return state;

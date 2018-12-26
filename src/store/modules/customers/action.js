@@ -1,10 +1,16 @@
 import * as ActionTypes from './constants';
 
-export default class BooksActions {
+export default class customersActions {
 
     static getCustumersRequest() {
         return {
             type: ActionTypes.LOAD_CUSTOMERS_REQUEST
+        }
+    }
+
+    static reloadCustumersRequest() {
+        return {
+            type: ActionTypes.RELOAD_CUSTOMERS_REQUEST
         }
     }
 
@@ -43,18 +49,18 @@ export default class BooksActions {
         }
     }
 
-    static selectCustomerToUpdate(book) {
+    static selectCustomerToUpdate(customer) {
         return {
             type: ActionTypes.SELECT_CUSTOMER_TO_UPDATE,
-            payload: { book }
+            payload: { customer }
         }
     }
 
 
-    static updateCustomerRequest(book) {
+    static updateCustomerRequest(customer) {
         return {
             type: ActionTypes.UPDATE_CUSTOMER_REQUEST,
-            payload: { book }
+            payload: { customer }
         }
     }
 

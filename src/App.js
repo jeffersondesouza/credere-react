@@ -7,12 +7,6 @@ import CustomerRegisterContainer from './containers/CustomerRegisterContainer';
 import CustomerListContainer from './containers/CustomerListContainer';
 
 class App extends Component {
-
-  componentDidMount() {
-    api.getCustomers()
-      .then(res => console.log(res));
-  }
-
   render() {
     return (
       <main className="main-block">
