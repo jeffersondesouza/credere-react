@@ -6,15 +6,14 @@ import * as ActionTypes from './constants';
 function booksReducer(state = INITIAL_STATE, action) {
 	switch (action.type) {
 
-
-		case ActionTypes.LOAD_BOOKS_REQUEST:
+		case ActionTypes.LOAD_CUSTOMERS_REQUEST:
 			return {
 				...state,
 				books: [],
 				isLoadingBooks: true,
 			}
 
-		case ActionTypes.LOAD_BOOKS_SUCCESS:
+		case ActionTypes.LOAD_CUSTOMERS_SUCCESS:
 			return {
 				...state,
 				books: [...action.payload.books],
@@ -22,7 +21,7 @@ function booksReducer(state = INITIAL_STATE, action) {
 				error: null
 			}
 
-		case ActionTypes.LOAD_BOOKS_FAILURE:
+		case ActionTypes.LOAD_CUSTOMERS_FAILURE:
 			return {
 				...state,
 				isLoadingBooks: false,
@@ -42,7 +41,7 @@ function booksReducer(state = INITIAL_STATE, action) {
 		case ActionTypes.LOAD_BOOK_SUCCESS:
 			return {
 				...state,
-				bookMessage:'',
+				bookMessage: '',
 				error: null,
 				detailsBook: { ...action.payload.book },
 				isLoadingDetailsBook: false
@@ -89,7 +88,7 @@ function booksReducer(state = INITIAL_STATE, action) {
 			return {
 				...state,
 				isSavingBook: true,
-				bookMessage:'',
+				bookMessage: '',
 				detailsBook: { ...action.payload.book },
 			}
 
@@ -98,7 +97,7 @@ function booksReducer(state = INITIAL_STATE, action) {
 				...state,
 				isSavingBook: false,
 				editingBookMode: false,
-				bookMessage:'Status de Leitura alterado com sucesso!',
+				bookMessage: 'Status de Leitura alterado com sucesso!',
 				error: null
 			}
 
@@ -106,7 +105,7 @@ function booksReducer(state = INITIAL_STATE, action) {
 			return {
 				...state,
 				isSavingBook: false,
-				bookMessage:'Ops, não conseguimos altrar o status da litura',
+				bookMessage: 'Ops, não conseguimos altrar o status da litura',
 				error: { ...action.payload.error }
 			}
 

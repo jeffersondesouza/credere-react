@@ -12,16 +12,15 @@ const serverResponse = [
 ];
 
 describe('Customers API', () => {
+  beforeEach(function () {
+    moxios.install(axios);
+  });
+
+  afterEach(function () {
+    moxios.uninstall(axios);
+  });
 
   describe('getCustomers()', () => {
-    beforeEach(function () {
-      moxios.install(axios);
-    });
-
-    afterEach(function () {
-      moxios.uninstall(axios);
-    });
-
 
     context('GET customers', () => {
 
@@ -68,13 +67,6 @@ describe('Customers API', () => {
 
   describe('save()', () => {
 
-    beforeEach(function () {
-      moxios.install(axios);
-    });
-
-    afterEach(function () {
-      moxios.uninstall(axios);
-    });
 
     context('when save data is correct', () => {
 
@@ -126,13 +118,7 @@ describe('Customers API', () => {
 
   describe('update()', () => {
 
-    beforeEach(function () {
-      moxios.install(axios);
-    });
 
-    afterEach(function () {
-      moxios.uninstall(axios);
-    });
 
     it("should Update an customer", (done) => {
       moxios.wait(() => {
@@ -143,7 +129,7 @@ describe('Customers API', () => {
         });
       });
 
-      customerApi.update(1, { name: 'joao' })
+      customerApi.update({ id: 1, name: 'joao' })
         .then((res) => {
           equal(res.msg, 'Customer Updated with success!');
           equal(res.customer.id, serverResponse[0].id);
@@ -153,11 +139,11 @@ describe('Customers API', () => {
 
 
     it("should not update  when ID is not informed", () => {
-      expect(() => customerApi.update(null, { name: 'joao' })).to.throw('Pass the user data and ID');
+      expect(() => customerApi.update({ name: 'joao' })).to.throw('Pass the user data and ID');
     });
 
     it("should not update  when User is not informed", () => {
-      expect(() => customerApi.update(1)).to.throw('Pass the user data and ID');
+      expect(() => customerApi.update(null)).to.throw('Pass the user data and ID');
     });
 
     it("should should get an error ehen server sends an ERROR", (done) => {
@@ -170,7 +156,7 @@ describe('Customers API', () => {
         });
       });
 
-      customerApi.update(1, { name: 'joao' })
+      customerApi.update({ id: 1, name: 'joao' })
         .catch((err) => {
           equal(err.message, 'Could not update the Customer');
           done();
@@ -182,13 +168,6 @@ describe('Customers API', () => {
 
   describe('delete()', () => {
 
-    beforeEach(function () {
-      moxios.install(axios);
-    });
-
-    afterEach(function () {
-      moxios.uninstall(axios);
-    });
 
     it("should Delete an customer", (done) => {
       moxios.wait(() => {

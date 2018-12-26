@@ -22,13 +22,13 @@ const save = (customer) => {
     });
 }
 
-const update = (userId, userData) => {
-  if (!userId || !userData) {
+const update = (customer) => {
+  if (!customer || !customer.id) {
     throw new Error('Pass the user data and ID');
   }
 
   return axios
-    .post(`customers/${userId}`, userData)
+    .post(`customers/${customer.id}`, customer)
     .then(res => ({
       msg: 'Customer Updated with success!',
       customer: res.data
