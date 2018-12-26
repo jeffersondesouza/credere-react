@@ -4,7 +4,9 @@ import sinon from 'sinon'
 import { equal } from 'assert'
 
 import Actions from '../action';
+import reducer from '../reducer';
 import CustomerMidleware from '../middleware';
+
 
 
 const serverResponse = [
@@ -22,6 +24,8 @@ describe('Customers MIDLEWARE', () => {
     });
 
     describe('getCustomersRequest()', () => {
+
+
         const spyRequest = sinon.spy(Actions, 'getCustumersRequest');
         const spyFailure = sinon.spy(Actions, 'getCustumersFailure');
         const spySuccess = sinon.spy(Actions, 'getCustumersSuccess');
@@ -228,84 +232,20 @@ describe('Customers MIDLEWARE', () => {
     });
 
 
+    describe('selectCustomerToUpdate()', () => {
+        const spyRequest = sinon.spy(Actions, 'selectCustomerToUpdate');
+
+        it("should select an customer to update", () => {
+            const user = {
+                id: 1,
+                name: 'jonh',
+            }
+            CustomerMidleware.selectCustomerToUpdate(user )(() => { });
+
+            sinon.assert.calledWith(spyRequest, user);
+
+        });
+    });
+
+
 });
-
-
-
-
-
-/* export default class BookMidleware {
-
-    static loadBooksRequest() {
-        return dispatch => {
-            dispatch(Actions.loadBooksRequest());
-            bookApi.loadBooks()
-                .then(books => dispatch(Actions.loadBooksSuccess(books)))
-                .catch(error => dispatch(Actions.loadBooksFailure({ error })));
-        };
-    }
-
-    static loadBookRequest(id) {
-        return dispatch => {
-            dispatch(Actions.loadBookRequest(id));
-            bookApi.loadBook(id)
-                .then(book => {
-                    dispatch(Actions.loadBookSuccess(book))
-                })
-                .catch(error => dispatch(Actions.loadBookFailure(error)));
-        };
-    }
-
-
-    static reloadBooksRequest() {
-        return dispatch => {
-            bookApi.loadBooks()
-                .then(books => dispatch(Actions.loadBooksSuccess(books)))
-                .catch(error => dispatch(Actions.loadBooksFailure({ error })));
-        };
-    }
-
-
-    static saveBook(book) {
-        return dispatch => {
-            dispatch(Actions.saveBookRequest(book));
-            return bookApi
-                .saveBook(book)
-                .then(res => dispatch(Actions.saveBookSuccess()))
-                .then(res => dispatch(this.reloadBooksRequest()))
-                .catch(err => dispatch(Actions.saveBookFailure(err)))
-        }
-    }
-
-    static updateBook(book) {
-        return dispatch => {
-            dispatch(Actions.updateBookRequest(book));
-            return bookApi
-                .updateBook(book)
-                .then(res => dispatch(this.reloadBooksRequest()))
-                .then(res => dispatch(Actions.updateBookSuccess()))
-                .catch(err => dispatch(Actions.updateBookFailure(err)))
-        }
-    }
-
-
-    static deleteBook(id) {
-        return dispatch => {
-            dispatch(Actions.deleteBookRequest(id));
-            return bookApi
-                .deleteBook(id)
-                .then(res => {
-                    dispatch(Actions.deleteBookSuccess());
-                    redirectTo('/books');
-                })
-                .catch(err => dispatch(Actions.deleteBookFailure(err)))
-        }
-    }
-
-    static selectBookToUpdate(book) {
-        return dispatch => {
-            return dispatch(Actions.selectBookToUpdate(book));
-        }
-    }
-
-} */

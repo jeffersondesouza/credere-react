@@ -3,7 +3,7 @@ import INITIAL_STATE from './state'
 import * as ActionTypes from './constants';
 
 
-function booksReducer(state = INITIAL_STATE, action) {
+function customerReducer(state = INITIAL_STATE, action) {
 	switch (action.type) {
 
 		case ActionTypes.LOAD_CUSTOMERS_REQUEST:
@@ -138,4 +138,4 @@ function booksReducer(state = INITIAL_STATE, action) {
 }
 
 
-export default booksReducer;
+export default customerReducer;

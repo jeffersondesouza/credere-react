@@ -43,9 +43,9 @@ export default class BooksActions {
         }
     }
 
-    static selectBookToUpdate(book) {
+    static selectCustomerToUpdate(book) {
         return {
-            type: ActionTypes.SELECT_BOOK_TO_UPDATE,
+            type: ActionTypes.SELECT_CUSTOMER_TO_UPDATE,
             payload: { book }
         }
     }

@@ -52,7 +52,11 @@ export default class BookMidleware {
     }
 
 
-
+    static selectCustomerToUpdate(customer) {
+        return dispatch => {
+            return dispatch(Actions.selectCustomerToUpdate(customer));
+        }
+    }
 
 
 
