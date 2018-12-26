@@ -1,8 +1,10 @@
 import React from 'react';
 
+import CustomerList from './../../components/CustomerList';
+
 const CustomerListContainer = () => (
   <div>
-    CustomerListContainer
+    <CustomerList />
   </div>
 );
 

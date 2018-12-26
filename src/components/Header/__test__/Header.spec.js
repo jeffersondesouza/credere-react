@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { shallow, mount, render } from 'enzyme';
 import sinon from 'sinon';
 
-import Header from '../Header'
+import Header from '../index'
 
 
 describe('Header />', () => {
