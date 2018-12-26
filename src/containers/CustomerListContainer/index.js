@@ -8,12 +8,16 @@ import CustomerList from './../../components/lists/CustomerList';
 class CustomerListComponent extends Component {
 
   componentDidMount() {
-    this.props.dispatchGetCustumers();
+    if (!this.props.isDeletingCustomer) {
+      this.props.dispatchGetCustumers();
+    }
   }
 
 
   handleSendToEdit = (customer) => {
-    this.props.dispatchSelectCustomer(customer)
+    if (!this.props.isDeletingCustomer) {
+      this.props.dispatchSelectCustomer(customer)
+    }
   }
 
   handleSendToDelete = (customer) => {

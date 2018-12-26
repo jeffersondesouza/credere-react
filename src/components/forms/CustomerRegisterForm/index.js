@@ -1,14 +1,14 @@
 import React from 'react';
 
 import './style/CustomerRegisterForm.scss';
+import Fieldset from '../../ui/Fieldset';
 
 const CustomerRegisterForm = () => (
 
   <form id="form-view" className="form">
     <input id="id" name="id" hidden type="text" name="name" />
 
-    <fieldset className="fieldset">
-      <legend className="legend">Cliente</legend>
+    <Fieldset legend='Cliente'>
       <div className="form-group">
         <label >Nome</label>
         <input className="input" id="name" type="text" name="name" />
@@ -32,16 +32,11 @@ const CustomerRegisterForm = () => (
         <input className="input" id="city" type="text" name="city" />
         <p id="cityValidation" hidden className="feedback-error">
           Se você Potiguar e sua Licença começa com 6 por favor informe sua Cidade
-  </p>
+          </p>
       </div>
-    </fieldset>
+    </Fieldset>
 
-    <fieldset className="fieldset">
-      <legend className="legend">
-        <div className="legend__title">Carteira de Motorista</div>
-        <div className="legend__subtitle">(Obrigatporio para maiores de idade)</div>
-      </legend>
-
+    <Fieldset legend="Carteira de Motorista" sublegend="(Obrigatporio para maiores de idade)">
       <div className="form-license">
         <div className="form-license__inputs">
           <div className="form-group">
@@ -64,11 +59,11 @@ const CustomerRegisterForm = () => (
           Por favor informe os dados de Sua Ccarteira de Motorista
   </p>
       </div>
-    </fieldset>
+
+    </Fieldset>
 
 
-    <fieldset className="fieldset">
-      <legend className="legend">Contatos</legend>
+    <Fieldset legend='Contatos'>
       <div className="form-group">
         <label >Telefones</label>
 
@@ -121,15 +116,11 @@ const CustomerRegisterForm = () => (
   </button>
 
       </div>
-    </fieldset>
+    </Fieldset>
 
 
-    <fieldset className="fieldset" id="parent">
-      <legend className="legend">
-        <div className="legend__title">Responsável </div>
-        <div className="legend__subtitle">(Obrigatório para menores de idade)</div>
-      </legend>
 
+    <Fieldset legend='Responsável' sublegend='(Obrigatório para menores de idade)'>
       <div className="form-parent">
         <div className="form-parent__inputs">
           <input className="input" id="parentId" hidden type="text" name="parentId" />
@@ -149,7 +140,7 @@ const CustomerRegisterForm = () => (
             </div>
             <p id="parentPhoneValidation" hidden className="feedback-error">
               Por favor, informe corretamente o telefone responsável legal
-      </p>
+            </p>
           </div>
         </div>
         <div className="form-parent__delete">
@@ -159,7 +150,8 @@ const CustomerRegisterForm = () => (
           </label>
         </div>
       </div>
-    </fieldset>
+    </Fieldset>
+
 
     <div className="form-action">
       <button className="btn btn--block" type="submit">Salvar Cliente</button>
