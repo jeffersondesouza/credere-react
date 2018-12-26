@@ -8,7 +8,7 @@ export default class BooksActions {
         }
     }
 
-    static getCustumersSuccess(books) {
+    static getCustumersSuccess(customers) {
         return {
             type: ActionTypes.LOAD_CUSTOMERS_SUCCESS,
             payload: { customers }

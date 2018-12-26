@@ -9,22 +9,22 @@ function customerReducer(state = INITIAL_STATE, action) {
 		case ActionTypes.LOAD_CUSTOMERS_REQUEST:
 			return {
 				...state,
-				books: [],
-				isLoadingBooks: true,
+				customers: [],
+				isLoadingCustomers: true,
 			}
 
 		case ActionTypes.LOAD_CUSTOMERS_SUCCESS:
 			return {
 				...state,
-				books: [...action.payload.books],
-				isLoadingBooks: false,
+				customers: [...action.payload.customers],
+				isLoadingCustomers: true,
 				error: null
 			}
 
 		case ActionTypes.LOAD_CUSTOMERS_FAILURE:
 			return {
 				...state,
-				isLoadingBooks: false,
+				isLoadingCustomers: false,
 				error: { ...action.payload.error }
 			}
 

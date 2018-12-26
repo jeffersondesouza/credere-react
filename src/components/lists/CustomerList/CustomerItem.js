@@ -1,22 +1,45 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const CustomerItem = () => (
+function phoneNumber(phones) {
+  const mainPhone = phones.find(phone => phone.main) || phones[0];
+  return <span>({mainPhone.code})-{mainPhone.number} </span>;
+}
+
+function email(emails) {
+  const mainEmail = emails.find(email => email.main) || emails[0];
+  return mainEmail.address;
+}
+
+function location(city, state) {
+  return <span>{city ? city : 'cidade não informada'},&nbsp;{state}</span>;
+}
+
+const CustomerItem = ({ customer }) => (
   <li className="customer">
     <div className="customer__info">
       <header className="customer__header">
-        <h3 className="customer__title">customer.name</h3>
+        <h3 className="customer__title">{customer.name}</h3>
         <div className="customer__licence">
-          <p title="licença"><i className="icon-address-card-o customer__licence-icon"></i>customer.driver_license ? (customer.driver_license.number) : ''</p>
-          <p title="Data de Emissão"><i className="icon-calendar-empty customer__licence-icon"></i>customer.driver_license ? (customer.driver_license.issued_at) : ''</p>
-          {/* ${customer.driver_license ? (``): ''} */}
+
+          <p title="licença">
+            {customer.driver_license && <i className="icon-address-card-o customer__licence-icon"></i>}
+            {customer.driver_license && (customer.driver_license.number)}
+          </p>
+          <p title="Data de Emissão">
+            {customer.driver_license && <i className="icon-calendar-empty customer__licence-icon"></i>}
+            {customer.driver_license && (customer.driver_license.issued_at)}
+          </p>
+
+
         </div>
       </header>
       <div className="customer__contact">
         <div className="customer__contact-header">
-          <p className="customer__contact-phone"><i className="icon-phone"></i>phoneNumber(customer.phones)</p>
-          <p className="customer__contact-email"><i className="icon-mail"></i>email(customer.emails)</p>
+          <p className="customer__contact-phone"><i className="icon-phone"></i>{phoneNumber(customer.phones)}</p>
+          <p className="customer__contact-email"><i className="icon-mail"></i>{email(customer.emails)}</p>
         </div>
-        <p className="customer__contact-location"><i className="icon-location "></i>location(customer.city, customer.state)</p>
+        <p className="customer__contact-location"><i className="icon-location "></i>{location(customer.city, customer.state)}</p>
       </div>
     </div>
 
@@ -27,5 +50,9 @@ const CustomerItem = () => (
 
   </li>
 );
+
+CustomerItem.propTypes = {
+  customer: PropTypes.object.isRequired
+}
 
 export default CustomerItem;
