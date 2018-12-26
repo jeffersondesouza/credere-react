@@ -7,6 +7,10 @@ const plugins = [];
 const API_URL = JSON.stringify('http://localhost:3000');
 const APP_USER_TOKEN_KEY_PARAM = 'userToken';
 
+
+const FontelloPlugin = require("fontello-webpack-plugin")
+
+
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   hash: true,
   minify: {
@@ -19,7 +23,18 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body'
 });
 
-
+plugins.push(
+  new FontelloPlugin({
+    config: require("./fontello.config.json"),
+    fonts:[ "eot", "woff", "woff2", "ttf", "svg" ],
+    name:"icons",
+    output: {
+      css: "[name].css",
+      font: "font/[name].[ext]"
+    },
+    
+  })
+)
 const CommonChunksPlugin = new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' });
 
 
