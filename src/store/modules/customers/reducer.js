@@ -1,7 +1,7 @@
 import INITIAL_STATE from './state'
 
 import * as ActionTypes from './constants';
-
+import * as selectors from './selectors'
 
 function customerReducer(state = INITIAL_STATE, action) {
 	switch (action.type) {
@@ -16,7 +16,7 @@ function customerReducer(state = INITIAL_STATE, action) {
 		case ActionTypes.LOAD_CUSTOMERS_SUCCESS:
 			return {
 				...state,
-				customers: [...action.payload.customers],
+				customers: selectors.mapCustomers(action.payload.customers),
 				isLoadingCustomers: true,
 				error: null
 			}
