@@ -1,22 +1,28 @@
 import React, { Component } from 'react'
 
-import api from  './store/api/customer.api';
+import api from './store/api/customer.api';
 
-import IconsPage from './components/IconsPage';
+import Header from './components/Header';
+import CustomerRegisterContainer from './containers/CustomerRegisterContainer';
+import CustomerListContainer from './containers/CustomerListContainer';
 
 class App extends Component {
 
-  componentDidMount(){
+  componentDidMount() {
     console.log('mount');
-    
+
     api.getCustomers()
-      .then(res=>console.log(res));
-    
+      .then(res => console.log(res));
+
   }
 
   render() {
     return (
-      <IconsPage />
+      <div>
+        <Header />
+        <CustomerRegisterContainer />
+        <CustomerListContainer />
+      </div>
     );
   }
 }
