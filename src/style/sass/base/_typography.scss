@@ -1,21 +1,11 @@
 body {
-  box-sizing: border-box;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 400;
-  font-size: 1.6rem;
-  line-height: 1.2;
-  color: $secondary-color-dark;
+  line-height: 1.7;
+  color: $grey-dark;
+  font-size: $font-size-md;
 }
 
-a {
-  &:link,
-  &:visited {
-    color: $blue;
-    text-decoration: none;
-    font-weight: 700,
-  }
-  &:hover {
-    font-weight: 700;
-    text-decoration: underline;
-  }
+[class^="icon-"] {
+  font-size: 1.5rem;
 }

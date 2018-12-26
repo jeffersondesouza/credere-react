@@ -1,14 +1,21 @@
-@import 'abstracts/variables';
-@import 'abstracts/mixins';
-@import 'abstracts/utils';
-/* base */
+@import "abstracts/mixins";
+@import "abstracts/variables";
 
-@import 'base/reset';
-@import 'base/typography';
+@import "base/animations";
+@import "base/base";
+@import "base/typography";
 
-@import 'components/buttons';
-@import 'components/forms';
-@import 'components/inputs';
+@import "components/main-block";
+@import "components/header";
+@import "components/form";
+@import "components/register";
+@import "components/customers-block";
+
+@import "components/buttons-links";
+@import "components/feedback-msg";
+@import "components/phones";
+@import "components/emails";
+@import "components/customers";
 
 
 
