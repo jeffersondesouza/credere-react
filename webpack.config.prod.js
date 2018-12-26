@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const babiliPlugin = require('babili-webpack-plugin');
 
 const plugins = [];
-const API_URL = JSON.stringify('https://api.punkapi.com/v2/beers');
+const API_URL = JSON.stringify('http://localhost:3000');
 const APP_USER_TOKEN_KEY_PARAM = 'userToken';
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({

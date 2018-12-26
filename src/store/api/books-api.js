@@ -1,28 +1,19 @@
 import axios from 'axios';
-import { getUserTokenFromHeader } from '../../utils/LocalStorageManager';
 
 const loadBooks = () => axios
-  .get('books',
-    { headers: { Authorization: `Bearer ${getUserTokenFromHeader()}` } }
-  )
+  .get('books')
   .then(res => res.data.books);
 
 const loadBook = (id) => axios
-  .get(`books/${id}`,
-    { headers: { Authorization: `Bearer ${getUserTokenFromHeader()}` } }
-  )
+  .get(`books/${id}`  )
   .then(res => res.data.book);
 
-const saveBook = (book) => axios.post('books', { ...book },
-  { headers: { Authorization: `Bearer ${getUserTokenFromHeader()}` } }
-)
+const saveBook = (book) => axios.post('books', { ...book })
   .then(res => res)
   .catch(err => console.log(err));
 
 
-const updateBook = (book) => axios.patch(`books/${book._id}`, { ...book },
-  { headers: { Authorization: `Bearer ${getUserTokenFromHeader()}` } }
-)
+const updateBook = (book) => axios.patch(`books/${book._id}`, { ...book })
   .then(res => {
     return res;
   })
@@ -30,9 +21,7 @@ const updateBook = (book) => axios.patch(`books/${book._id}`, { ...book },
 
 
 const deleteBook = (id) => axios
-  .delete(`books/${id}`,
-    { headers: { Authorization: `Bearer ${getUserTokenFromHeader()}` } }
-  )
+  .delete(`books/${id}`)
   .then(res => {
     return res;
   })
