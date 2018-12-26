@@ -39,6 +39,22 @@ export default class BookMidleware {
         };
     }
 
+    static deleteCustomerRequest(customerid) {
+
+        return dispatch => {
+
+            dispatch(Actions.deleteCustomerRequest(customerid));
+
+            return customerAPI.remove(customerid)
+                .then(customers => dispatch(Actions.deleteCustomerSuccess(customers)))
+                .catch(error => dispatch(Actions.deleteCustomerFailure({ error })));
+        };
+    }
+
+
+
+
+
 
 
     /* 

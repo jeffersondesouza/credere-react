@@ -73,7 +73,7 @@ describe('Customers MIDLEWARE', () => {
         const spyFailure = sinon.spy(Actions, 'saveCustomerFailure');
         const spySuccess = sinon.spy(Actions, 'saveCustomerSuccess');
 
-        it("should retutn customers and call all success store action", (done) => {
+        it("should save a customer and call all success actions", (done) => {
 
             moxios.wait(() => {
                 let request = moxios.requests.mostRecent()
@@ -92,7 +92,7 @@ describe('Customers MIDLEWARE', () => {
             CustomerMidleware.saveCustomerRequest({ name: 'joao' })(() => { });
         });
 
-        it("should not call scess save when server send ann error", (done) => {
+        it("should not save and must call error actions when server sends an error", (done) => {
 
             moxios.wait(() => {
                 let request = moxios.requests.mostRecent()
@@ -124,7 +124,7 @@ describe('Customers MIDLEWARE', () => {
         const spyFailure = sinon.spy(Actions, 'updateCustomerFailure');
         const spySuccess = sinon.spy(Actions, 'updateCustomerSuccess');
 
-        it("should retutn customers and call all success store action", (done) => {
+        it("should update customer and call all success actions", (done) => {
 
             moxios.wait(() => {
                 let request = moxios.requests.mostRecent()
@@ -143,7 +143,7 @@ describe('Customers MIDLEWARE', () => {
             CustomerMidleware.updateCustomerRequest({ id: 1, name: 'joao' })(() => { });
         });
 
-        it("should not call scess save when server send ann error", (done) => {
+        it("should update and must call error actions when server sends an error", (done) => {
 
             moxios.wait(() => {
                 let request = moxios.requests.mostRecent()
@@ -173,6 +173,60 @@ describe('Customers MIDLEWARE', () => {
                 .to.throw('Pass the user data and ID');
         });
     });
+
+
+
+
+
+
+    describe('deleteCustomerRequest()', () => {
+        const spyRequest = sinon.spy(Actions, 'deleteCustomerRequest');
+        const spyFailure = sinon.spy(Actions, 'deleteCustomerFailure');
+        const spySuccess = sinon.spy(Actions, 'deleteCustomerSuccess');
+
+        it("should delete and call all success actions", (done) => {
+
+            moxios.wait(() => {
+                let request = moxios.requests.mostRecent()
+                request.respondWith({
+                    status: 200,
+                    response: { id: 1, firstName: 'Fred', lastName: 'Flintstone' },
+                }).then(res => {
+                    equal(res.data.id, serverResponse[0].id);
+                    sinon.assert.called(spyRequest);
+                    sinon.assert.called(spySuccess);
+                    done()
+                })
+            });
+
+            CustomerMidleware.deleteCustomerRequest(1)(() => { });
+        });
+
+        it("should not delete and must call error actions when server sends an error", (done) => {
+
+            moxios.wait(() => {
+                let request = moxios.requests.mostRecent()
+                request.respondWith({
+                    status: 404,
+                    response: [
+                        { id: 1, firstName: 'Fred', lastName: 'Flintstone' },
+                        { id: 2, firstName: 'Wilma', lastName: 'Flintstone' }
+                    ]
+                }).then(err => {
+                    sinon.assert.called(spyRequest);
+                    sinon.assert.called(spyFailure);
+                    done();
+                })
+            });
+            CustomerMidleware.deleteCustomerRequest(1)(() => { });
+        });
+
+        it("should have an erro if not pass the custumer id to create", () => {
+            expect(() => CustomerMidleware.deleteCustomerRequest()(() => { }))
+                .to.throw('Pass the user ID');
+        });
+    });
+
 
 });
 

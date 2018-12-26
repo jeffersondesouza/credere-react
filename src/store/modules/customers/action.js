@@ -50,7 +50,7 @@ export default class BooksActions {
         }
     }
 
-    
+
     static updateCustomerRequest(book) {
         return {
             type: ActionTypes.UPDATE_CUSTOMER_REQUEST,
@@ -72,22 +72,22 @@ export default class BooksActions {
     }
 
 
-    static deleteBookRequest(id) {
+    static deleteCustomerRequest(id) {
         return {
-            type: ActionTypes.DELETE_BOOK_REQUEST,
+            type: ActionTypes.DELETE_CUSTOMER_REQUEST,
             payload: { id }
         }
     }
 
-    static deleteBookSuccess() {
+    static deleteCustomerSuccess() {
         return {
-            type: ActionTypes.DELETE_BOOK_SUCCESS,
+            type: ActionTypes.DELETE_CUSTOMER_SUCCESS,
         }
     }
 
-    static deleteBookFailure(error) {
+    static deleteCustomerFailure(error) {
         return {
-            type: ActionTypes.DELETE_BOOK_FAILURE,
+            type: ActionTypes.DELETE_CUSTOMER_FAILURE,
             payload: { error }
         }
     }
