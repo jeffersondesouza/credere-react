@@ -10,7 +10,7 @@ describe('CustomerRegisterContainer />', () => {
 
   it("should init component", () => {
     const component = shallow(<CustomerRegisterContainer />);
-    expect(component.type()).to.be.eql('div');
+    expect(component.type()).to.be.eql('section');
   });
 
 });

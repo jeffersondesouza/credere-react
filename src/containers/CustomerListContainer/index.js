@@ -1,11 +1,11 @@
 import React from 'react';
+import CustomerList from './../../components/lists/CustomerList';
 
-import CustomerList from './../../components/CustomerList';
 
 const CustomerListContainer = () => (
-  <div>
+  <section id="customers-view" className="customers-block">
     <CustomerList />
-  </div>
+  </section>
 );
 
 export default CustomerListContainer;
