@@ -16,14 +16,30 @@ class PhonesGroupInput extends Component {
     this.addPhoneInput();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value && nextProps.value.length) {
+
+      const phones = nextProps.value.map((phone, i) => ({
+        name: `${i++}`,
+        code: phone.code,
+        number: phone.number
+      }));
+
+      this.setState({
+        phonesInputs: [...phones]
+      });
+    }
+  }
+
   handleChange = ({ name, value }) => {
 
-    const phones = this.state.phonesInputs.map(phone => {
-      if (phone.name === name) {
-        return { ...phone, ...value }
-      }
-      return { ...phone }
-    });
+    const phones = this.state.phonesInputs
+      .map(phone => {
+        if (phone.name === name) {
+          return { ...phone, ...value }
+        }
+        return { ...phone }
+      });
 
 
     this.setState({
@@ -31,23 +47,26 @@ class PhonesGroupInput extends Component {
     },
       () => this.props.onChange({ name: this.props.name, value: this.state.phonesInputs })
     );
-   
+
   }
 
   addPhoneInput = (value) => {
     this.setState({
-      phonesInputs: [...this.state.phonesInputs, {
-        name: `${this.state.phonesInputs.length++}`,
-        code: value ? value.code : '',
-        number: value ? value.number : ''
-      }]
+      phonesInputs: [
+        ...this.state.phonesInputs,
+        {
+          name: `${this.state.phonesInputs.length++}`,
+          code: value ? value.code : '',
+          number: value ? value.number : ''
+        }]
     });
   }
 
 
   render() {
-    const { clazz, type, value, label, errorMsg } = this.props;
     const { phonesInputs } = this.state;
+    console.log('phonesInputs', phonesInputs);
+
 
     return (
       <div>

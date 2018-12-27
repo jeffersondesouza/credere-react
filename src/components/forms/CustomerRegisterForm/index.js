@@ -74,7 +74,7 @@ class CustomerRegisterForm extends Component {
       mainEmail,
       mainPhone,
       location,
-      driverLicense,
+      driveLicense,
       phones,
       emails,
     } = this.state.custumer;
@@ -130,7 +130,7 @@ class CustomerRegisterForm extends Component {
         <Fieldset legend="Carteira de Motorista" sublegend="(Obrigatporio para maiores de idade)">
           <DriveLicenceInput
             name="driveLicense"
-            value={driverLicense}
+            value={driveLicense}
             onChange={this.handleChange}
           />
         </Fieldset>

@@ -18,7 +18,7 @@ class PhoneInput extends Component {
   }
 
 
-  handleChange = ({name, value}) => {
+  handleChange = ({ name, value }) => {
     this.setState(
       {
         ...this.state,
@@ -29,7 +29,7 @@ class PhoneInput extends Component {
   }
 
   render() {
-    const { clazz, type, value, label, errorMsg, showMainPhone} = this.props;
+    const { clazz, type, value, code, number, label, errorMsg, showMainPhone } = this.props;
 
     return (
       <div>
@@ -37,18 +37,20 @@ class PhoneInput extends Component {
           <div className="phone">
             <Input
               name="code"
+              value={code}
               clazz="input phone__code"
               placeholder="88"
               onChange={this.handleChange}
             />
             <Input
               name="number"
+              value={number}
               clazz="input phone__number"
               placeholder="8888-8888"
               onChange={this.handleChange}
             />
 
-            { showMainPhone && <RadioButton name="mainPhone" label="Principal" onChange={this.handleChange} /> }
+            {showMainPhone && <RadioButton name="mainPhone" label="Principal" onChange={this.handleChange} />}
 
           </div>
           <input onChange={this.handleChange} type="checkbox" className="phones__remove-check" />
