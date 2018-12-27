@@ -17,7 +17,7 @@ class ParentInput extends Component {
 
   handleChange = ({ name, value }) => {
     this.setState(
-      {  [name]: value  },
+      { [name]: value },
       () => this.props.onChange({ name: this.props.name, value: this.state })
     );
   }
@@ -55,7 +55,7 @@ class ParentInput extends Component {
 
 ParentInput.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.object,
   errorMsg: PropTypes.string
 }
 

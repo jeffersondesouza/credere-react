@@ -75,7 +75,7 @@ class PhonesGroupInput extends Component {
 
 PhonesGroupInput.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.array,
   errorMsg: PropTypes.string
 }
 

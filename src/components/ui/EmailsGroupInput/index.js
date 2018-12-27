@@ -72,7 +72,7 @@ class EmailsGroupInput extends Component {
 
 EmailsGroupInput.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.array,
   errorMsg: PropTypes.string
 }
 

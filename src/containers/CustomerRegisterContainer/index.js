@@ -25,7 +25,9 @@ class CustomerRegister extends Component {
         <CustomerRegisterHeader />
         <div className="register__body">
           <CustomerRegisterFeedback />
-          <CustomerRegisterForm onSubmit={this.handleSubmit} />
+          <CustomerRegisterForm 
+            {...this.props} 
+            onSubmit={this.handleSubmit} />
         </div>
       </section>
     );

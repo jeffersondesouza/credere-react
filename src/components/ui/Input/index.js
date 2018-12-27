@@ -19,6 +19,7 @@ class Input extends Component {
       <div className="input-div">
         <label>{label}</label>
         <input
+          value={value}
           name={name || ''}
           onChange={this.handleChange}
           type={type || 'text'}

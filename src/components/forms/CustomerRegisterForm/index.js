@@ -17,23 +17,71 @@ class CustomerRegisterForm extends Component {
 
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      custumer: {
+        id: '',
+        name: '',
+        birthday: '',
+        state: '',
+        city: '',
+        parent: {
+          id: '',
+          name: '',
+          phone: '',
+        },
+        mainEmail: '',
+        mainPhone: '',
+        location: '',
+        driverLicense: {
+          id: '',
+          number: '',
+          issued_at: '',
+        },
+        phones: [],
+        emails: [],
+      }
+    };
   }
 
-  handleChange = ({name, value}) => {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.editingCustomer && nextProps.editingCustomer.id) {
+      this.setState({
+        custumer: { ...nextProps.editingCustomer }
+      });
+    }
+    console.log('nextProps.editingCustomer', nextProps.editingCustomer);
+  }
+
+  handleChange = ({ name, value }) => {
     this.setState({
-      [name]: value
+      custumer: { [name]: value }
     });
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onSubmit(this.state)
+    this.props.onSubmit(this.state.custumer)
   }
 
   render() {
 
+    const {
+      name,
+      birthday,
+      state,
+      city,
+      parent,
+      mainEmail,
+      mainPhone,
+      location,
+      driverLicense,
+      phones,
+      emails,
+    } = this.state.custumer;
+
     return (
+
+
       <form onSubmit={this.handleSubmit} className="form">
         <Fieldset legend="Cliente">
 
@@ -41,6 +89,7 @@ class CustomerRegisterForm extends Component {
             <Input
               label="Nome"
               name="name"
+              value={name}
               errorMsg="Por favor, informe so nome do cliente"
               onChange={this.handleChange}
             />
@@ -51,6 +100,7 @@ class CustomerRegisterForm extends Component {
               label="Data de Nascimento"
               type="date"
               name="birthdate"
+              value={birthday}
               errorMsg="Por favor, informe sua data de nascimento"
               onChange={this.handleChange}
             />
@@ -60,6 +110,7 @@ class CustomerRegisterForm extends Component {
             <Input
               label="Estado"
               name="state"
+              value={state}
               errorMsg="Por favor, informe o estado do Clinete"
               onChange={this.handleChange}
             />
@@ -69,6 +120,7 @@ class CustomerRegisterForm extends Component {
             <Input
               label="Cidade"
               name="city"
+              value={city}
               errorMsg="Se você Potiguar e sua Licença começa com 6 por favor informe sua Cidade"
               onChange={this.handleChange}
             />
@@ -76,7 +128,11 @@ class CustomerRegisterForm extends Component {
         </Fieldset>
 
         <Fieldset legend="Carteira de Motorista" sublegend="(Obrigatporio para maiores de idade)">
-          <DriveLicenceInput name="driveLicense" onChange={this.handleChange} />
+          <DriveLicenceInput
+            name="driveLicense"
+            value={driverLicense}
+            onChange={this.handleChange}
+          />
         </Fieldset>
 
 
@@ -84,12 +140,14 @@ class CustomerRegisterForm extends Component {
           <FormGroup label="Telefones">
             <PhonesGroupInput
               name="phones"
+              value={phones}
               onChange={this.handleChange}
             />
           </FormGroup>
           <FormGroup label="Emails">
             <EmailsGroupInput
               name="emails"
+              value={emails}
               onChange={this.handleChange}
             />
           </FormGroup>
@@ -99,6 +157,7 @@ class CustomerRegisterForm extends Component {
         <Fieldset legend='Responsável' sublegend='(Obrigatório para menores de idade)'>
           <ParentInput
             name="parent"
+            parent={parent}
             onChange={this.handleChange}
           />
         </Fieldset>

@@ -59,7 +59,7 @@ class DriveLicenceInput extends Component {
 
 DriveLicenceInput.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.object,
   errorMsg: PropTypes.string
 }
 

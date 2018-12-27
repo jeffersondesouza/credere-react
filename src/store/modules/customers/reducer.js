@@ -3,6 +3,8 @@ import INITIAL_STATE from './state'
 import * as ActionTypes from './constants';
 import * as selectors from './selectors'
 
+import caseParser from './../../../utils/customerCaseParser';
+
 function customerReducer(state = INITIAL_STATE, action) {
 	switch (action.type) {
 
@@ -11,12 +13,14 @@ function customerReducer(state = INITIAL_STATE, action) {
 			return {
 				...state,
 				isSavingCustomer: true,
+				saveCustumerSuccess: false,
 			}
 
 		case ActionTypes.SAVE_CUSTOMER_SUCCESS:
 			return {
 				...state,
 				isSavingCustomer: false,
+				saveCustumerSuccess: true,
 				error: null
 			}
 
@@ -24,6 +28,7 @@ function customerReducer(state = INITIAL_STATE, action) {
 			return {
 				...state,
 				isSavingCustomer: false,
+				saveCustumerSuccess: false,
 				error: { ...action.payload.error }
 			}
 
@@ -62,7 +67,7 @@ function customerReducer(state = INITIAL_STATE, action) {
 
 			return {
 				...state,
-				editingCustomer: { ...action.payload.customer }
+				editingCustomer: caseParser.toViewCase(action.payload.customer)
 			}
 
 		case ActionTypes.UPDATE_CUSTOMER_REQUEST:
@@ -92,12 +97,14 @@ function customerReducer(state = INITIAL_STATE, action) {
 			return {
 				...state,
 				isDeletingCustomer: true,
+				deleteCustumerSuccess: false
 			}
 
 		case ActionTypes.DELETE_CUSTOMER_SUCCESS:
 			return {
 				...state,
 				isDeletingCustomer: false,
+				deleteCustumerSuccess: true,
 				error: null
 			}
 
@@ -105,6 +112,7 @@ function customerReducer(state = INITIAL_STATE, action) {
 			return {
 				...state,
 				isDeletingCustomer: false,
+				deleteCustumerSuccess: false,
 				error: { ...action.payload.error }
 			}
 

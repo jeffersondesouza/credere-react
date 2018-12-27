@@ -5,4 +5,6 @@ export default {
     isLoadingCustomers: false,
     isSavingCustomer: false,
     isDeletingCustomer: false,
+    saveCustumerSuccess: false,
+    deleteCustumerSuccess: false,
 }
