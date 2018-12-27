@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import PhoneInput from '../PhoneInput';
+import AddMoreButton from '../AddMoreButton/AddMoreButton';
 
-class Input extends Component {
+class EmailsGroupInput extends Component {
 
   handleChange = e => {
     const target = event.target;
@@ -15,16 +17,19 @@ class Input extends Component {
     const { clazz, type, value, label, errorMsg, } = this.props;
 
     return (
-      <label>
-        {label}
-        <input onChange={this.handleChange} type={type || 'text'} className={clazz || 'input'} />
-        <p className="feedback-error">{errorMsg}</p>
-      </label>
+      <div>
+        <ul>
+          <li><PhoneInput /></li>
+        </ul>
+        <p className="feedback-error">Por favor, informe pelo menos um telefone</p>
+        <p className="feedback-error">Você pode cadastrar no máxio 4 (quatro) telefones</p>
+        <AddMoreButton />
+      </div>
     );
   }
 }
 
-Input.propTypes = {
+/* PhoneInput.propTypes = {
   clazz: PropTypes.string,
   type: PropTypes.string,
   name: PropTypes.string.isRequired,
@@ -32,6 +37,6 @@ Input.propTypes = {
   label: PropTypes.string,
   errorMsg: PropTypes.string
 }
+ */
 
-
-export default Input;
+export default EmailsGroupInput;

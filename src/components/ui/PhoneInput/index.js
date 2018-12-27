@@ -15,17 +15,19 @@ class PhoneInput extends Component {
     const { clazz, type, value, label, errorMsg, } = this.props;
 
     return (
-      <div className="phones__item">
-        <input onChange={this.handleChange} hidden={true} />
-        <input onChange={this.handleChange} type="checkbox" className="phones__remove-check" />
-        <div className="phone">
-          <input onChange={this.handleChange} className="input phone__code" placeholder="88" />
-          <input onChange={this.handleChange} className="input phone__number" placeholder="8888-8888" />
-          <label className="phone__main-phone">
-            <input onChange={this.handleChange} className="phone__radio" type="radio" name="mainFone" />
-            <span>Principal</span>
-          </label>
+      <div>
+        <div className="phones__item">
+          <div className="phone">
+            <input onChange={this.handleChange} className="input phone__code" placeholder="88" />
+            <input onChange={this.handleChange} className="input phone__number" placeholder="8888-8888" />
+            <label className="phone__main-phone">
+              <input onChange={this.handleChange} className="phone__radio" type="radio" name="mainFone" />
+              <span>Principal</span>
+            </label>
+          </div>
+          <input onChange={this.handleChange} type="checkbox" className="phones__remove-check" />
         </div>
+        <p className="feedback-error">Informe o DDD e número</p>
       </div>
     );
   }
