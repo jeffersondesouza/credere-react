@@ -16,15 +16,11 @@ class ParentInput extends Component {
   }
 
   handleChange = ({ name, value }) => {
-    console.log('name', name);
-    console.log('value', value);
-
     this.setState(
-      { value: { [name]: value } },
+      {  [name]: value  },
       () => this.props.onChange({ name: this.props.name, value: this.state })
     );
   }
-
 
 
   render() {

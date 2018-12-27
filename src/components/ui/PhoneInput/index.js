@@ -18,11 +18,11 @@ class PhoneInput extends Component {
   }
 
 
-  handleChange = (name, inputValue) => {
+  handleChange = ({name, value}) => {
     this.setState(
       {
         ...this.state,
-        [name]: inputValue
+        [name]: value
       },
       () => this.props.onChange({ name: this.props.name, value: this.state })
     );

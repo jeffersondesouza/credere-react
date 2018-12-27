@@ -17,12 +17,12 @@ class EmailInput extends Component {
   }
 
 
-  handleChange = (name, inputValue) => {
+  handleChange = ({name, value}) => {
 
 
     this.setState({
       ...this.state,
-      [name]: inputValue
+      [name]: value
     },
       () => this.props.onChange({ name: this.props.name, value: this.state })
     );
@@ -38,7 +38,7 @@ class EmailInput extends Component {
     return (
       <div className="emails__item">
         <Input
-          name={name}
+          name="address"
           onChange={this.handleChange}
         />
 
