@@ -9,15 +9,15 @@ import CustomerList from '../index'
 describe('CustomerList />', () => {
 
   it("should init the component", () => {
-    const component = shallow(<CustomerList />);
+    const component = shallow(<CustomerList customers={[]} />);
 
-    expect(component.type()).to.be.eql('div');
+    expect(component.type()).to.be.eql('ul');
   });
 
 
 });
 
-/* 
+/*
 
   it("should render SideMenu ", () => {
     expect(component.type()).to.be.eql('div');

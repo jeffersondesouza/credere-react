@@ -10,7 +10,7 @@ describe('CustomerRegisterForm />', () => {
 
   it("should init component", () => {
     const component = shallow(<CustomerRegisterForm />);
-    expect(component.type()).to.be.eql('div');
+    expect(component.type()).to.be.eql('form');
   });
 
 });

@@ -43,8 +43,6 @@ class CustomerListComponent extends Component {
 }
 
 
-
-
 const mapStateToProps = (state) => ({
   ...state.customer
 });
