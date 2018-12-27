@@ -49,7 +49,6 @@ class CustomerRegisterForm extends Component {
         custumer: { ...nextProps.editingCustomer }
       });
     }
-    console.log('nextProps.editingCustomer', nextProps.editingCustomer);
   }
 
   handleChange = ({ name, value }) => {

@@ -17,6 +17,20 @@ class EmailsGroupInput extends Component {
     this.addEmailInput();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value && nextProps.value.length) {
+
+      const emails = nextProps.value.map((email, i) => ({
+        name: `${i++}`,
+        address: email.address,
+      }));
+
+      this.setState({
+        emailInputs: [...emails]
+      });
+    }
+  }
+
   handleChange = ({ name, value }) => {
 
     const emails = this.state.emailInputs.map(email => {
@@ -25,7 +39,7 @@ class EmailsGroupInput extends Component {
       }
       return { ...email }
     });
-    
+
     this.setState({
       emailInputs: [...emails]
     },
@@ -57,7 +71,7 @@ class EmailsGroupInput extends Component {
               <li key={i}>
                 <EmailInput
                   name={email.name}
-                  address={email.address}
+                  value={email.address}
                   onChange={this.handleChange} />
               </li>)
           }

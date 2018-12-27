@@ -18,8 +18,6 @@ class EmailInput extends Component {
 
 
   handleChange = ({name, value}) => {
-
-
     this.setState({
       ...this.state,
       [name]: value
@@ -29,16 +27,15 @@ class EmailInput extends Component {
   }
 
 
-
-
-
   render() {
-    const { clazz, type, name, value, label, errorMsg, } = this.props;
+    const { value } = this.props;
 
     return (
       <div className="emails__item">
         <Input
           name="address"
+          type="email"
+          value={value}
           onChange={this.handleChange}
         />
 

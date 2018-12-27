@@ -65,9 +65,6 @@ class PhonesGroupInput extends Component {
 
   render() {
     const { phonesInputs } = this.state;
-    console.log('phonesInputs', phonesInputs);
-
-
     return (
       <div>
         <ul>

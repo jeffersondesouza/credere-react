@@ -13,7 +13,6 @@ class CustomerRegister extends Component {
 
 
   handleSubmit = (customer) => {
-    console.log('customer', customer);
     this.props.saveCustumer(customerCaseParser.toServerCase(customer))
   }
 
