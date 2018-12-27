@@ -1,28 +1,31 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import './styles.scss';
+
 class Input extends Component {
 
   handleChange = e => {
     const target = event.target;
     const value = (target.type === 'checkbox' || target.type === 'radio') ? target.checked : target.value;
 
-    this.props.onChange(this.props.name, value)
+    this.props.onChange({ name: this.props.name, value })
   }
 
   render() {
-    const { clazz, type, value, placeholder, label, errorMsg, } = this.props;
+    const { clazz, type, name, value, placeholder, label, errorMsg, } = this.props;
 
     return (
-      <label>
-        {label}
+      <div className="input-div">
+        <label>{label}</label>
         <input
+          name={name || ''}
           onChange={this.handleChange}
           type={type || 'text'}
           placeholder={placeholder}
           className={clazz || 'input'} />
         <p className="feedback-error">{errorMsg}</p>
-      </label>
+      </div>
     );
   }
 }

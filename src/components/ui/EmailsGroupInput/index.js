@@ -1,29 +1,70 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PhoneInput from '../PhoneInput';
 import AddMoreButton from '../AddMoreButton/AddMoreButton';
+import EmailInput from '../EmailInput';
 
 class EmailsGroupInput extends Component {
 
-  handleChange = e => {
-    const target = event.target;
-    const value = (target.type === 'checkbox' || target.type === 'radio') ? target.checked : target.value;
+  constructor() {
+    super();
+    this.state = {
+      emailInputs: []
+    };
+  }
 
-    this.props.onChange(value, this.props.name)
+
+  componentDidMount() {
+    this.addEmailInput();
+  }
+
+  handleChange = ({ name, value }) => {
+
+    const emails = this.state.emailInputs.map(email => {
+      if (email.name === name) {
+        return { ...email, ...value }
+      }
+      return { ...email }
+    });
+    
+    this.setState({
+      emailInputs: [...emails]
+    },
+      () => this.props.onChange({ name: this.props.name, value: this.state.emailInputs })
+    );
 
   }
 
+  addEmailInput = (value) => {
+    this.setState({
+      emailInputs: [...this.state.emailInputs, {
+        name: `${this.state.emailInputs.length++}`,
+        address: value ? value.address : '',
+      }]
+    });
+  }
+
+
+
   render() {
     const { clazz, type, value, label, errorMsg, } = this.props;
+    const { emailInputs } = this.state;
 
     return (
       <div>
         <ul>
-          <li><PhoneInput /></li>
+          {
+            emailInputs.map((email, i) =>
+              <li key={i}>
+                <EmailInput
+                  name={email.name}
+                  address={email.address}
+                  onChange={this.handleChange} />
+              </li>)
+          }
         </ul>
         <p className="feedback-error">Por favor, informe pelo menos um telefone</p>
         <p className="feedback-error">Você pode cadastrar no máxio 4 (quatro) telefones</p>
-        <AddMoreButton />
+        <AddMoreButton onClick={this.addEmailInput} />
       </div>
     );
   }

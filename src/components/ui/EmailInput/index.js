@@ -1,37 +1,64 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import RadioButton from '../RadioButton';
+import Input from '../Input';
 
 class EmailInput extends Component {
 
-  handleChange = e => {
-    const target = event.target;
-    const value = (target.type === 'checkbox' || target.type === 'radio') ? target.checked : target.value;
 
-    this.props.onChange(value, this.props.name)
-
+  constructor() {
+    super();
+    this.state = {
+      id: '',
+      address: '',
+      destroy: false,
+      mainEmail: false
+    };
   }
 
+
+  handleChange = (name, inputValue) => {
+
+
+    this.setState({
+      ...this.state,
+      [name]: inputValue
+    },
+      () => this.props.onChange({ name: this.props.name, value: this.state })
+    );
+  }
+
+
+
+
+
   render() {
-    const { clazz, type, value, label, errorMsg, } = this.props;
+    const { clazz, type, name, value, label, errorMsg, } = this.props;
 
     return (
       <div className="emails__item">
-        <input onChange={this.handleChange} hidden={true} />
+        <Input
+          name={name}
+          onChange={this.handleChange}
+        />
+
+        <RadioButton name="mainPhone" label="Principal" onChange={this.handleChange} />
         <input onChange={this.handleChange} type="checkbox" className="emails__item-remove" />
-        <input onChange={this.handleChange} type="email" className="input" />
+
       </div>
     );
   }
 }
 
-/* EmailInput.propTypes = {
+EmailInput.propTypes = {
+  name: PropTypes.string.isRequired,
   clazz: PropTypes.string,
   type: PropTypes.string,
-  name: PropTypes.string.isRequired,
+  address: PropTypes.string,
   value: PropTypes.string,
   label: PropTypes.string,
   errorMsg: PropTypes.string
-} */
+}
 
 
 export default EmailInput;

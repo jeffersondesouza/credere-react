@@ -21,9 +21,6 @@ class CustomerRegisterForm extends Component {
   }
 
   handleChange = ({name, value}) => {
-  console.log('FORM', {name, value});
-
-
     this.setState({
       [name]: value
     });
@@ -31,12 +28,8 @@ class CustomerRegisterForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
     this.props.onSubmit(this.state)
-
   }
-
-
 
   render() {
 

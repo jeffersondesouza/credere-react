@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Input from '../Input';
+import RadioButton from '../RadioButton';
 
 class PhoneInput extends Component {
 
   constructor() {
     super();
     this.state = {
+      id: '',
       code: '',
-      number: ''
+      number: '',
+      destroy: false,
+      mainPhone: false
     };
   }
 
@@ -25,7 +29,7 @@ class PhoneInput extends Component {
   }
 
   render() {
-    const { clazz, type, value, label, errorMsg, } = this.props;
+    const { clazz, type, value, label, errorMsg, showMainPhone} = this.props;
 
     return (
       <div>
@@ -44,14 +48,12 @@ class PhoneInput extends Component {
               onChange={this.handleChange}
             />
 
-            <label className="phone__main-phone">
-              <input onChange={this.handleChange} className="phone__radio" type="radio" name="mainFone" />
-              <span>Principal</span>
-            </label>
+            { showMainPhone && <RadioButton name="mainPhone" label="Principal" onChange={this.handleChange} /> }
+
           </div>
           <input onChange={this.handleChange} type="checkbox" className="phones__remove-check" />
         </div>
-        <p className="feedback-error">Informe o DDD e número</p>
+        <p className="feedback-error">Por favor, informe o DDD e número</p>
       </div>
     );
   }

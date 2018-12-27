@@ -8,7 +8,6 @@ class PhonesGroupInput extends Component {
   constructor() {
     super();
     this.state = {
-      value: {},
       phonesInputs: []
     };
   }
@@ -19,12 +18,9 @@ class PhonesGroupInput extends Component {
 
   handleChange = ({ name, value }) => {
 
-    console.log('Inputs', this.state.phonesInputs);
-
-
     const phones = this.state.phonesInputs.map(phone => {
       if (phone.name === name) {
-        return { ...phone, code: value.code, number: value.number }
+        return { ...phone, ...value }
       }
       return { ...phone }
     });
