@@ -7,25 +7,32 @@ import './style/CustomerRegisterForm.scss';
 import Fieldset from '../../ui/Fieldset';
 import Input from '../../ui/Input';
 import FormGroup from '../../ui/FormGroup';
-import PhoneInput from '../../ui/PhoneInput';
-import EmailInput from '../../ui/EmailInput';
-import AddMoreButton from '../../ui/AddMoreButton/AddMoreButton';
 import PhonesGroupInput from '../../ui/PhonesGroupInput';
 import EmailsGroupInput from '../../ui/EmailsGroupInput';
 import ParentInput from '../../ui/ParentInput';
+import DriveLicenceInput from '../../ui/DriveLicenceInput';
 
 
 class CustomerRegisterForm extends Component {
 
+  constructor() {
+    super();
+    this.state = {};
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
 
-    // this.props.onSubmit(this.state.customer)
+    this.props.onSubmit(this.state)
 
   }
 
   handleChange = (value, name) => {
-    console.log('name', value, name);
+    console.log('changes', value, name);
+
+    this.setState({
+      [name]: value
+    });
   }
 
 
@@ -74,48 +81,22 @@ class CustomerRegisterForm extends Component {
         </Fieldset>
 
         <Fieldset legend="Carteira de Motorista" sublegend="(Obrigatporio para maiores de idade)">
-          <div className="form-license">
-            <div className="form-license__inputs">
-              <FormGroup>
-                <Input
-                  label={"Número"}
-                  name="driver-license-number"
-                  errorMsg="Se você Potiguar e sua Licença começa com 6 por favor informe sua Cidade"
-                  onChange={this.handleChange}
-                />
-              </FormGroup>
-              <Input
-                label="Data de Emissão"
-                type="date"
-                name="driver-license-issueda-at"
-                errorMsg="Por favor informe os dados de Sua Carteira de Motorista"
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-license__delete">
-              <label className="btn--icon-label">
-                <input onChange={this.handleChange} id="licenseDestroy" type="checkbox" name="licenseDestroy" />
-                <i className="icon-trash icon--danger"></i>
-              </label>
-            </div>
-          </div>
-
+          <DriveLicenceInput name="driveLicense" />
         </Fieldset>
 
 
         <Fieldset legend='Contatos'>
           <FormGroup label="Telefones">
-            <PhonesGroupInput />
+            <PhonesGroupInput name="phones"/>
           </FormGroup>
           <FormGroup label="Emails">
-            <EmailsGroupInput />
+            <EmailsGroupInput name="emails"/>
           </FormGroup>
         </Fieldset>
 
 
-
         <Fieldset legend='Responsável' sublegend='(Obrigatório para menores de idade)'>
-          <ParentInput />
+          <ParentInput name="parent"/>
         </Fieldset>
 
 

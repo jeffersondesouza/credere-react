@@ -45,11 +45,8 @@ class ParentInput extends Component {
 }
 
 ParentInput.propTypes = {
-  clazz: PropTypes.string,
-  type: PropTypes.string,
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   value: PropTypes.string,
-  label: PropTypes.string,
   errorMsg: PropTypes.string
 }
 

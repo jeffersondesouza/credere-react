@@ -29,14 +29,11 @@ class EmailsGroupInput extends Component {
   }
 }
 
-/* PhoneInput.propTypes = {
-  clazz: PropTypes.string,
-  type: PropTypes.string,
+EmailsGroupInput.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string,
-  label: PropTypes.string,
   errorMsg: PropTypes.string
 }
- */
+
 
 export default EmailsGroupInput;
