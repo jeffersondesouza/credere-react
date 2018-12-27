@@ -7,17 +7,20 @@ class Input extends Component {
     const target = event.target;
     const value = (target.type === 'checkbox' || target.type === 'radio') ? target.checked : target.value;
 
-    this.props.onChange(value, this.props.name)
-
+    this.props.onChange(this.props.name, value)
   }
 
   render() {
-    const { clazz, type, value, label, errorMsg, } = this.props;
+    const { clazz, type, value, placeholder, label, errorMsg, } = this.props;
 
     return (
       <label>
         {label}
-        <input onChange={this.handleChange} type={type || 'text'} className={clazz || 'input'} />
+        <input
+          onChange={this.handleChange}
+          type={type || 'text'}
+          placeholder={placeholder}
+          className={clazz || 'input'} />
         <p className="feedback-error">{errorMsg}</p>
       </label>
     );

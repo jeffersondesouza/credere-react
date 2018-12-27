@@ -5,25 +5,73 @@ import AddMoreButton from '../AddMoreButton/AddMoreButton';
 
 class PhonesGroupInput extends Component {
 
-  handleChange = e => {
-    const target = event.target;
-    const value = (target.type === 'checkbox' || target.type === 'radio') ? target.checked : target.value;
-
-    this.props.onChange(value, this.props.name)
-
+  constructor() {
+    super();
+    this.state = {
+      value: {},
+      phonesInputs: []
+    };
   }
 
+  componentDidMount() {
+    this.addPhoneInput();
+  }
+
+  handleChange = ({ name, value }) => {
+
+    console.log('Inputs', this.state.phonesInputs);
+
+
+    const phones = this.state.phonesInputs.map(phone => {
+      if (phone.name === name) {
+        return { ...phone, code: value.code, number: value.number }
+      }
+      return { ...phone }
+    });
+
+
+    this.setState({
+      phonesInputs: [...phones]
+    },
+      () => this.props.onChange({ name: this.props.name, value: this.state.phonesInputs })
+    );
+   
+  }
+
+  addPhoneInput = (value) => {
+    this.setState({
+      phonesInputs: [...this.state.phonesInputs, {
+        name: `${this.state.phonesInputs.length++}`,
+        code: value ? value.code : '',
+        number: value ? value.number : ''
+      }]
+    });
+  }
+
+
+
+
   render() {
-    const { clazz, type, value, label, errorMsg, } = this.props;
+    const { clazz, type, value, label, errorMsg } = this.props;
+    const { phonesInputs } = this.state;
 
     return (
       <div>
         <ul>
-          <li><PhoneInput /></li>
+          {
+            phonesInputs.map((phone, i) =>
+              <li key={i}>
+                <PhoneInput
+                  name={phone.name}
+                  code={phone.code}
+                  number={phone.number}
+                  onChange={this.handleChange} />
+              </li>)
+          }
         </ul>
         <p className="feedback-error">Por favor, informe pelo menos um telefone</p>
         <p className="feedback-error">Você pode cadastrar no máxio 4 (quatro) telefones</p>
-        <AddMoreButton />
+        <AddMoreButton onClick={this.addPhoneInput} />
       </div>
     );
   }

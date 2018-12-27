@@ -20,6 +20,15 @@ class CustomerRegisterForm extends Component {
     this.state = {};
   }
 
+  handleChange = ({name, value}) => {
+  console.log('FORM', {name, value});
+
+
+    this.setState({
+      [name]: value
+    });
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -27,13 +36,6 @@ class CustomerRegisterForm extends Component {
 
   }
 
-  handleChange = (value, name) => {
-    console.log('changes', value, name);
-
-    this.setState({
-      [name]: value
-    });
-  }
 
 
   render() {
@@ -81,22 +83,31 @@ class CustomerRegisterForm extends Component {
         </Fieldset>
 
         <Fieldset legend="Carteira de Motorista" sublegend="(Obrigatporio para maiores de idade)">
-          <DriveLicenceInput name="driveLicense" />
+          <DriveLicenceInput name="driveLicense" onChange={this.handleChange} />
         </Fieldset>
 
 
         <Fieldset legend='Contatos'>
           <FormGroup label="Telefones">
-            <PhonesGroupInput name="phones"/>
+            <PhonesGroupInput
+              name="phones"
+              onChange={this.handleChange}
+            />
           </FormGroup>
           <FormGroup label="Emails">
-            <EmailsGroupInput name="emails"/>
+            <EmailsGroupInput
+              name="emails"
+              onChange={this.handleChange}
+            />
           </FormGroup>
         </Fieldset>
 
 
         <Fieldset legend='Responsável' sublegend='(Obrigatório para menores de idade)'>
-          <ParentInput name="parent"/>
+          <ParentInput
+            name="parent"
+            onChange={this.handleChange}
+          />
         </Fieldset>
 
 

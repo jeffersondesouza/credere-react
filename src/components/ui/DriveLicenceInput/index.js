@@ -5,8 +5,18 @@ import Input from '../Input';
 
 class DriveLicenceInput extends Component {
 
-  handleChange = e => {
-    this.props.onChange(value, this.props.name);
+  constructor() {
+    super();
+    this.state = {
+      value: {}
+    };
+  }
+
+  handleChange = (name, value) => {
+    this.setState(
+      { value: { [name]: value } },
+      () => this.props.onChange({ name: this.props.name, value: this.state.value })
+    );
   }
 
   render() {

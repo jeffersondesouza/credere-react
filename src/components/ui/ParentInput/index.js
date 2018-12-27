@@ -5,12 +5,18 @@ import PhoneInput from '../PhoneInput';
 
 class ParentInput extends Component {
 
-  handleChange = e => {
-    const target = event.target;
-    const value = (target.type === 'checkbox' || target.type === 'radio') ? target.checked : target.value;
+  constructor() {
+    super();
+    this.state = {
+      value: {}
+    };
+  }
 
-    this.props.onChange(value, this.props.name)
-
+  handleChange = (name, value) => {
+    this.setState(
+      { value: { [name]: value } },
+      () => this.props.onChange({ name: this.props.name, value: this.state.value })
+    );
   }
 
   render() {
