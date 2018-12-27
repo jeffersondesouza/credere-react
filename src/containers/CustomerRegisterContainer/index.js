@@ -13,7 +13,7 @@ class CustomerRegister extends Component {
 
   handleSubmit = (customer) => {
     console.log('customer', customer);
-
+    this.props.saveCustumer(customer)
   }
 
   render() {
@@ -39,9 +39,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  dispatchGetCustumers: () => dispatch(CustomerMidleware.getCustomersRequest()),
-  dispatchDeleteCustumer: (id) => dispatch(CustomerMidleware.deleteCustomerRequest(id)),
-  dispatchSelectCustomer: (customer) => dispatch(CustomerMidleware.selectCustomerToUpdate(customer)),
+  saveCustumer: (customer) => dispatch(CustomerMidleware.saveCustomerRequest(customer)),
 });
 
 const CustomerRegisterContainer = connect(mapStateToProps, mapDispatchToProps)(CustomerRegister);

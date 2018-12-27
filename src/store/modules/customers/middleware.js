@@ -28,6 +28,7 @@ export default class CustomerMidleware {
             dispatch(Actions.saveCustomerRequest(customer));
             return customerAPI.save(customer)
                 .then(customers => dispatch(Actions.saveCustomerSuccess(customers)))
+                .then(() => dispatch(CustomerMidleware.reloadCustumersRequest()))
                 .catch(error => dispatch(Actions.saveCustomerFailure({ error })));
         };
     }
@@ -52,7 +53,7 @@ export default class CustomerMidleware {
 
             return customerAPI.remove(customerid)
                 .then(customers => dispatch(Actions.deleteCustomerSuccess(customers)))
-                .then(customers => dispatch(CustomerMidleware.reloadCustumersRequest()))
+                .then(() => dispatch(CustomerMidleware.reloadCustumersRequest()))
                 .catch(error => dispatch(Actions.deleteCustomerFailure({ error })));
         };
     }
