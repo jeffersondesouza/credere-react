@@ -17,6 +17,14 @@ class PhoneInput extends Component {
     };
   }
 
+ /*  componentWillReceiveProps(nextProps) {
+    if (nextProps.phone && nextProps.phone.id) {
+      this.setState({
+        ...nextProps.phoneid,
+      });
+    }
+  } */
+
 
   handleChange = ({ name, value }) => {
     this.setState(

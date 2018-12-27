@@ -10,8 +10,13 @@ class ParentInput extends Component {
   constructor() {
     super();
     this.state = {
+      id: '',
       name: '',
-      phone: {}
+      phone: {
+        id: '',
+        code: '',
+        number: '',
+      }
     };
   }
 
@@ -24,7 +29,7 @@ class ParentInput extends Component {
 
 
   render() {
-    const { clazz, type, value, label, errorMsg, } = this.props;
+    const { value } = this.props;
 
     return (
       <div className="form-parent">
@@ -32,13 +37,19 @@ class ParentInput extends Component {
           <FormGroup label="Nome">
             <Input
               name="name"
+              value={value ? value.name : ''}
               errorMsg="Por favor, informe o nome do seu responsável"
               onChange={this.handleChange}
             />
           </FormGroup>
 
           <FormGroup label="Telefone">
-            <PhoneInput name="phone" onChange={this.handleChange} showMainPhone={false} />
+            <PhoneInput
+              name="phone"
+              code={value ? value.phone.code : ''}
+              number={value ? value.phone.number : ''}
+              onChange={this.handleChange}
+              showMainPhone={false} />
           </FormGroup>
 
         </div>
@@ -56,6 +67,7 @@ class ParentInput extends Component {
 ParentInput.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.object,
+  parent: PropTypes.object,
   errorMsg: PropTypes.string
 }
 

@@ -1,39 +1,45 @@
+import dateCoverter from "./date-coverter";
+
+
 export const toServerCase = (data, includeIds) => {
 
   const driver_license = {
-    ...data.driveLicense,
-    issued_at: data.driveLicense.issueAt
+    ...data.driverLicense,
+    issued_at: (data.driverLicense && data.driverLicense.issueAt) ? dateCoverter.toServerFormat(data.driverLicense.issueAt) : ''
   }
 
-  const snackVersion = {
+  const custumerOnServerFormat = {
     ...data,
+    birthday: data.birthday ? dateCoverter.toServerFormat(data.birthday) : '',
     driver_license: { ...driver_license }
   };
 
-  if (!includeIds) {
-    delete snackVersion.id;
+  if (!data.id) {
+    delete custumerOnServerFormat.id;
   }
 
-  delete snackVersion.driveLicense;
+  delete custumerOnServerFormat.driverLicense;
 
-  return snackVersion;
+  return custumerOnServerFormat;
 }
 
 export const toViewCase = (data) => {
 
-  const driveLicense = {
+  const driverLicense = {
     ...data.driver_license,
     issueAt: data.driver_license.issued_at
   }
 
-  const snackVersion = {
+  delete driverLicense.issued_at;
+
+  const custumerOnServerFormat = {
     ...data,
-    driveLicense: { ...driveLicense }
+    driverLicense: { ...driverLicense }
   };
 
-  delete snackVersion.driver_license;
+  delete custumerOnServerFormat.driver_license;
 
-  return snackVersion;
+  return custumerOnServerFormat;
 }
 
 

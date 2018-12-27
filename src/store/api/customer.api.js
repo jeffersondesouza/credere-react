@@ -28,7 +28,7 @@ const update = (customer) => {
   }
 
   return axios
-    .post(`customers/${customer.id}`, customer)
+    .patch(`customers/${customer.id}`, customer)
     .then(res => ({
       msg: 'Customer Updated with success!',
       customer: res.data

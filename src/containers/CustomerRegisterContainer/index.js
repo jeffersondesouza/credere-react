@@ -13,20 +13,27 @@ class CustomerRegister extends Component {
 
 
   handleSubmit = (customer) => {
-    this.props.saveCustumer(customerCaseParser.toServerCase(customer))
+
+    if (this.props.editingCustomer) {
+      const data = customerCaseParser.toServerCase(customer);
+      console.log('data', data);
+      this.props.updateCustomer(data);
+    } else {
+      const data = customerCaseParser.toServerCase(customer, true);
+      this.props.saveCustumer(data);
+    }
   }
 
   render() {
-    const { error, editingCustomer, isSavingCustomer } = this.props;
-
     return (
       <section className="register">
         <CustomerRegisterHeader />
         <div className="register__body">
           <CustomerRegisterFeedback />
-          <CustomerRegisterForm 
-            {...this.props} 
-            onSubmit={this.handleSubmit} />
+          <CustomerRegisterForm
+            {...this.props}
+            onSubmit={this.handleSubmit}
+          />
         </div>
       </section>
     );
@@ -42,6 +49,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
   saveCustumer: (customer) => dispatch(CustomerMidleware.saveCustomerRequest(customer)),
+  updateCustomer: (customer) => dispatch(CustomerMidleware.updateCustomerRequest(customer)),
 });
 
 const CustomerRegisterContainer = connect(mapStateToProps, mapDispatchToProps)(CustomerRegister);

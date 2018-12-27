@@ -41,6 +41,7 @@ export default class CustomerMidleware {
 
             return customerAPI.update(customer)
                 .then(customers => dispatch(Actions.updateCustomerSuccess(customers)))
+                .then(() => dispatch(CustomerMidleware.reloadCustumersRequest()))
                 .catch(error => dispatch(Actions.updateCustomerFailure({ error })));
         };
     }

@@ -9,14 +9,14 @@ describe('ObjectCaseParser', () => {
     it('should pass customer to snack case - Server Case', () => {
       const snackCase = parser.toServerCase(camelCaseObject, true);
 
-      expect(snackCase.driveLicense).to.be.eql(undefined);
-      expect(snackCase.driver_license.issued_at).to.be.eql(camelCaseObject.driveLicense.issueAt);
+      expect(snackCase.driverLicense).to.be.eql(undefined);
+      expect(snackCase.driver_license.issued_at).to.be.eql(camelCaseObject.driverLicense.issueAt);
     });
 
 
     it('should pass customer to snack case without id - Server Case', () => {
       const snackCase = parser.toServerCase(camelCaseObject);
-      expect(snackCase.driver_license.issued_at).to.be.eql(camelCaseObject.driveLicense.issueAt);
+      expect(snackCase.driver_license.issued_at).to.be.eql(camelCaseObject.driverLicense.issueAt);
       expect(snackCase.id).to.be.eql(undefined);
     });
 
@@ -27,7 +27,7 @@ describe('ObjectCaseParser', () => {
     it('should pass customer to snack case - Frontend case', () => {
       const camelCase = parser.toViewCase(snackCaseObject, true);
       expect(camelCase.driver_license).to.be.eql(undefined);
-      expect(camelCase.driveLicense.issueAt).to.be.eql(snackCaseObject.driver_license.issued_at);
+      expect(camelCase.driverLicense.issueAt).to.be.eql(snackCaseObject.driver_license.issued_at);
     });
 
   });
@@ -72,7 +72,7 @@ const camelCaseObject = {
   'birthdate': '0002-02-12',
   'state': '222',
   'city': '22',
-  'driveLicense': {
+  'driverLicense': {
     'number': '222',
     'issueAt': '2222-02-22'
   },

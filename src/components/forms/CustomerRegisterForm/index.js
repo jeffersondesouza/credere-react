@@ -35,7 +35,7 @@ class CustomerRegisterForm extends Component {
         driverLicense: {
           id: '',
           number: '',
-          issued_at: '',
+          issuedAt: '',
         },
         phones: [],
         emails: [],
@@ -52,34 +52,26 @@ class CustomerRegisterForm extends Component {
   }
 
   handleChange = ({ name, value }) => {
+
     this.setState({
-      custumer: { [name]: value }
+      custumer: {
+        ...this.state.custumer,
+        [name]: value
+      }
     });
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.onSubmit(this.state.custumer)
+    console.log('this.state.custumer', this.state.custumer);
   }
 
   render() {
 
-    const {
-      name,
-      birthday,
-      state,
-      city,
-      parent,
-      mainEmail,
-      mainPhone,
-      location,
-      driveLicense,
-      phones,
-      emails,
-    } = this.state.custumer;
+    const { name, birthday, state, city, driverLicense, phones, emails, parent } = this.state.custumer;
 
     return (
-
 
       <form onSubmit={this.handleSubmit} className="form">
         <Fieldset legend="Cliente">
@@ -128,8 +120,8 @@ class CustomerRegisterForm extends Component {
 
         <Fieldset legend="Carteira de Motorista" sublegend="(Obrigatporio para maiores de idade)">
           <DriveLicenceInput
-            name="driveLicense"
-            value={driveLicense}
+            name="driverLicense"
+            value={driverLicense}
             onChange={this.handleChange}
           />
         </Fieldset>
@@ -153,14 +145,14 @@ class CustomerRegisterForm extends Component {
         </Fieldset>
 
 
-        <Fieldset legend='Responsável' sublegend='(Obrigatório para menores de idade)'>
+        {/*         <Fieldset legend='Responsável' sublegend='(Obrigatório para menores de idade)'>
           <ParentInput
             name="parent"
-            parent={parent}
+            value={parent}
             onChange={this.handleChange}
           />
         </Fieldset>
-
+ */}
 
         <div className="form-action">
           <button className="btn btn--block" type="submit">Salvar Cliente</button>

@@ -72,9 +72,8 @@ class PhonesGroupInput extends Component {
             phonesInputs.map((phone, i) =>
               <li key={i}>
                 <PhoneInput
-                  name={phone.name}
-                  code={phone.code}
                   number={phone.number}
+                  code={phone.code}
                   onChange={this.handleChange} />
               </li>)
           }
