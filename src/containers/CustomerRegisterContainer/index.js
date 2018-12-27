@@ -10,17 +10,21 @@ import CustomerRegisterForm from './../../components/forms/CustomerRegisterForm'
 
 class CustomerRegister extends Component {
 
-  render() {
 
+  handleSubmit = (customer) => {
+    console.log('customer', customer);
+
+  }
+
+  render() {
     const { error, editingCustomer, isSavingCustomer } = this.props;
-    console.log('error, editingCustomer, isSavingCustomer', error, editingCustomer, isSavingCustomer);
 
     return (
       <section className="register">
         <CustomerRegisterHeader />
         <div className="register__body">
           <CustomerRegisterFeedback />
-          <CustomerRegisterForm />
+          <CustomerRegisterForm onSubmit={this.handleSubmit} />
         </div>
       </section>
     );
