@@ -8,32 +8,35 @@ class PhonesGroupInput extends Component {
   constructor() {
     super();
     this.state = {
-      phonesInputs: []
+      phones: [
+        { name: `0`, code: '', number: '' }
+
+      ]
     };
   }
 
   componentDidMount() {
-    this.addPhoneInput();
+    // this.addPhoneInput();
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.value && nextProps.value.length) {
+    if (nextProps.phones && nextProps.phones.length) {
 
-      const phones = nextProps.value.map((phone, i) => ({
-        name: `${i++}`,
-        code: phone.code,
-        number: phone.number
+      const phones = nextProps.phones.map((phone, i) => ({
+        ...phone,
+        name: `${i}`
       }));
 
       this.setState({
-        phonesInputs: [...phones]
+        phones
       });
     }
   }
 
   handleChange = ({ name, value }) => {
+    console.log('name, value', name, value);
 
-    const phones = this.state.phonesInputs
+    const phones = this.state.phones
       .map(phone => {
         if (phone.name === name) {
           return { ...phone, ...value }
@@ -43,38 +46,38 @@ class PhonesGroupInput extends Component {
 
 
     this.setState({
-      phonesInputs: [...phones]
+      phones: [...phones]
     },
-      () => this.props.onChange({ name: this.props.name, value: this.state.phonesInputs })
+      () => this.props.onChange({ name: this.props.name, value: this.state.phones })
     );
 
   }
 
-  addPhoneInput = (value) => {
-    this.setState({
-      phonesInputs: [
-        ...this.state.phonesInputs,
-        {
-          name: `${this.state.phonesInputs.length++}`,
-          code: value ? value.code : '',
-          number: value ? value.number : ''
-        }]
-    });
+  addPhoneInput = () => {
+    console.log('addPhoneInput');
+
+    const phones = [
+      ...this.state.phones,
+      { name: `${this.state.phones.length++}`, code: '', number: '' }
+    ];
+
+    this.setState({ phones });
   }
 
 
   render() {
-    const { phonesInputs } = this.state;
+    const { phones } = this.state;
+    console.log('this.state', this.state);
     return (
       <div>
         <ul>
           {
-            phonesInputs.map((phone, i) =>
+            phones.map((phone, i) =>
               <li key={phone.id || i}>
                 <PhoneInput
+                  name={`${i}`}
                   phone={phone}
-                  code={phone.code}
-                  number={phone.number}
+
                   onChange={this.handleChange} />
               </li>
             )
@@ -90,7 +93,7 @@ class PhonesGroupInput extends Component {
 
 PhonesGroupInput.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.array,
+  phones: PropTypes.array,
   errorMsg: PropTypes.string
 }
 

@@ -14,12 +14,15 @@ class CustomerRegister extends Component {
 
   handleSubmit = (customer) => {
 
+    console.log('this.props.editingCustomer', this.props.editingCustomer);
     if (this.props.editingCustomer.id) {
       const data = customerCaseParser.toServerCase(customer);
-      this.props.updateCustomer(data);
+    //  this.props.updateCustomer(data);
+      console.log('update', data);
     } else {
       const data = customerCaseParser.toServerCase(customer, true);
-      this.props.saveCustumer(data);
+      // this.props.saveCustumer(data);
+      console.log('save', data);
     }
   }
 

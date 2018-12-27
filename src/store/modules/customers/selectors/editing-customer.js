@@ -39,7 +39,8 @@ export const editingCustomer = (customer) => {
     ...customer,
     birthday: customer.birthday ? dateConverter.toDateInputFormat(customer.birthday) : '',
     driver_license: { ...driverLicense },
-    parent
+    parent,
+    bornState: customer.state
   };
 
 

@@ -22,7 +22,7 @@ class CustomerRegisterForm extends Component {
         id: '',
         name: '',
         birthday: '',
-        stateBorn: '',
+        bornState: '',
         city: '',
         parent: {
           id: '',
@@ -45,11 +45,11 @@ class CustomerRegisterForm extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.editingCustomer && nextProps.editingCustomer.id) {
-      const stateBorn = nextProps.editingCustomer.state;
+      const bornState = nextProps.editingCustomer.state;
       delete nextProps.editingCustomer.state;
 
       this.setState({
-        custumer: { ...nextProps.editingCustomer, stateBorn }
+        custumer: { ...nextProps.editingCustomer, bornState }
       });
     }
   }
@@ -70,7 +70,7 @@ class CustomerRegisterForm extends Component {
 
   render() {
 
-    const { name, birthday, phones, city, driverLicense, stateBorn, emails, parent } = this.state.custumer;
+    const { name, birthday, phones, city, driverLicense, bornState, emails, parent } = this.state.custumer;
 
     return (
 
@@ -103,8 +103,8 @@ class CustomerRegisterForm extends Component {
           <FormGroup >
             <Input
               label="Estado"
-              name="stateBorn"
-              value={stateBorn}
+              name="bornState"
+              value={bornState}
               errorMsg="Por favor, informe o estado do Clinete"
               onChange={this.handleChange}
             />
@@ -136,7 +136,7 @@ class CustomerRegisterForm extends Component {
           <FormGroup label="Telefones">
             <PhonesGroupInput
               name="phones"
-              value={phones}
+              phones={phones}
               onChange={this.handleChange}
             />
           </FormGroup>

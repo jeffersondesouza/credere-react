@@ -19,13 +19,13 @@ class PhoneInput extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.phone && nextProps.phone.code && nextProps.phone.number) {
+
+    if (nextProps.phone) {
       this.setState({
         ...this.state,
         ...nextProps.phone,
-        id: nextProps.phone.id,
-        code: nextProps.phone.code,
-        number: nextProps.phone.number,
+      }, ()=>{
+        
       });
     }
   }
@@ -54,23 +54,20 @@ class PhoneInput extends Component {
 
   render() {
     const { showMainPhone } = this.props;
-    const { code, number } = this.state;
-
-    const codeProp = this.props.code;
-    const numberProp = this.props.number;
+    const { code, number } = this.props.phone;
 
     return (
       <div>
         <div className="phones__item">
           <div className="phone">
             <Input
-              value={code || codeProp}
+              value={code}
               clazz="input phone__code"
               placeholder="88"
               onChange={this.handleChangeCode}
             />
             <Input
-              value={number || numberProp}
+              value={number}
               clazz="input phone__number"
               placeholder="8888-8888"
               onChange={this.handleChangeNumber}
