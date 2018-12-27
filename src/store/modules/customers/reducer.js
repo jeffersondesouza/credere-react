@@ -3,7 +3,6 @@ import INITIAL_STATE from './state'
 import * as ActionTypes from './constants';
 import * as selectors from './selectors'
 
-import caseParser from './../../../utils/customerCaseParser';
 
 function customerReducer(state = INITIAL_STATE, action) {
 	switch (action.type) {
@@ -67,7 +66,7 @@ function customerReducer(state = INITIAL_STATE, action) {
 
 			return {
 				...state,
-				editingCustomer: caseParser.toViewCase(action.payload.customer)
+				editingCustomer: selectors.editingCustomer(action.payload.customer)
 			}
 
 		case ActionTypes.UPDATE_CUSTOMER_REQUEST:

@@ -45,8 +45,6 @@ class PhonesGroupInput extends Component {
   }
 
 
-
-
   render() {
     const { clazz, type, value, label, errorMsg } = this.props;
     const { phonesInputs } = this.state;

@@ -22,7 +22,7 @@ export const toServerCase = (data, includeIds) => {
 export const toViewCase = (data) => {
 
   const driveLicense = {
-    ...data.driveLicense,
+    ...data.driver_license,
     issueAt: data.driver_license.issued_at
   }
 

@@ -1,5 +1,5 @@
 
-import parser from '../customerCaseParser.js';
+import parser from '../customer-case-parser';
 
 
 describe('ObjectCaseParser', () => {

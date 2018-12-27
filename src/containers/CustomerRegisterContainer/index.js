@@ -6,7 +6,7 @@ import CustomerMidleware from '../../store/modules/customers/middleware';
 import CustomerRegisterHeader from './../../components/ui/CustomerRegisterHeader';
 import CustomerRegisterFeedback from './../../components/ui/CustomerRegisterFeedback';
 import CustomerRegisterForm from './../../components/forms/CustomerRegisterForm';
-import customerCaseParser from '../../utils/customerCaseParser';
+import customerCaseParser from '../../utils/customer-case-parser';
 
 
 class CustomerRegister extends Component {
