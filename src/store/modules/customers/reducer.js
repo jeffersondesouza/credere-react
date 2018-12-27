@@ -20,6 +20,7 @@ function customerReducer(state = INITIAL_STATE, action) {
 				...state,
 				isSavingCustomer: false,
 				saveCustumerSuccess: true,
+				editingCustomer:{},
 				error: null
 			}
 
@@ -79,7 +80,7 @@ function customerReducer(state = INITIAL_STATE, action) {
 			return {
 				...state,
 				isSavingCustomer: false,
-				editingCustomer: null,
+				editingCustomer:{},
 				error: null
 			}
 

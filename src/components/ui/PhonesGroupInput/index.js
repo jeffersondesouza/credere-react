@@ -70,12 +70,14 @@ class PhonesGroupInput extends Component {
         <ul>
           {
             phonesInputs.map((phone, i) =>
-              <li key={i}>
+              <li key={phone.id || i}>
                 <PhoneInput
-                  number={phone.number}
+                  phone={phone}
                   code={phone.code}
+                  number={phone.number}
                   onChange={this.handleChange} />
-              </li>)
+              </li>
+            )
           }
         </ul>
         <p className="feedback-error">Por favor, informe pelo menos um telefone</p>

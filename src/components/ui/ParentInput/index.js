@@ -20,6 +20,20 @@ class ParentInput extends Component {
     };
   }
 
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.parent && nextProps.parent.phone) {
+
+      this.setState({
+        ...this.state,
+        ...nextProps.parent,
+        phone: { ...nextProps.parent.phone }
+      });
+
+    }
+  }
+
+
   handleChange = ({ name, value }) => {
     this.setState(
       { [name]: value },
@@ -29,7 +43,7 @@ class ParentInput extends Component {
 
 
   render() {
-    const { value } = this.props;
+    const { name, phone } = this.state;
 
     return (
       <div className="form-parent">
@@ -37,7 +51,7 @@ class ParentInput extends Component {
           <FormGroup label="Nome">
             <Input
               name="name"
-              value={value ? value.name : ''}
+              value={name}
               errorMsg="Por favor, informe o nome do seu responsável"
               onChange={this.handleChange}
             />
@@ -46,8 +60,7 @@ class ParentInput extends Component {
           <FormGroup label="Telefone">
             <PhoneInput
               name="phone"
-              code={value ? value.phone.code : ''}
-              number={value ? value.phone.number : ''}
+              phone={phone}
               onChange={this.handleChange}
               showMainPhone={false} />
           </FormGroup>

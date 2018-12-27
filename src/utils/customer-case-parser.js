@@ -11,7 +11,8 @@ export const toServerCase = (data, includeIds) => {
   const custumerOnServerFormat = {
     ...data,
     birthday: data.birthday ? dateCoverter.toServerFormat(data.birthday) : '',
-    driver_license: { ...driver_license }
+    driver_license: { ...driver_license },
+    state: data.stateBorn
   };
 
   if (!data.id) {

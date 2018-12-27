@@ -34,7 +34,7 @@ class Input extends Component {
 Input.propTypes = {
   clazz: PropTypes.string,
   type: PropTypes.string,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   value: PropTypes.string,
   label: PropTypes.string,
   errorMsg: PropTypes.string

@@ -22,7 +22,7 @@ class CustomerRegisterForm extends Component {
         id: '',
         name: '',
         birthday: '',
-        state: '',
+        stateBorn: '',
         city: '',
         parent: {
           id: '',
@@ -45,14 +45,16 @@ class CustomerRegisterForm extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.editingCustomer && nextProps.editingCustomer.id) {
+      const stateBorn = nextProps.editingCustomer.state;
+      delete nextProps.editingCustomer.state;
+
       this.setState({
-        custumer: { ...nextProps.editingCustomer }
+        custumer: { ...nextProps.editingCustomer, stateBorn }
       });
     }
   }
 
   handleChange = ({ name, value }) => {
-
     this.setState({
       custumer: {
         ...this.state.custumer,
@@ -64,12 +66,11 @@ class CustomerRegisterForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.onSubmit(this.state.custumer)
-    console.log('this.state.custumer', this.state.custumer);
   }
 
   render() {
 
-    const { name, birthday, state, city, driverLicense, phones, emails, parent } = this.state.custumer;
+    const { name, birthday, phones, city, driverLicense, stateBorn, emails, parent } = this.state.custumer;
 
     return (
 
@@ -90,18 +91,20 @@ class CustomerRegisterForm extends Component {
             <Input
               label="Data de Nascimento"
               type="date"
-              name="birthdate"
+              name="birthday"
               value={birthday}
-              errorMsg="Por favor, informe sua data de nascimento"
+              errorMsg="Por favor, informe so nome do cliente"
               onChange={this.handleChange}
             />
           </FormGroup>
 
+
+
           <FormGroup >
             <Input
               label="Estado"
-              name="state"
-              value={state}
+              name="stateBorn"
+              value={stateBorn}
               errorMsg="Por favor, informe o estado do Clinete"
               onChange={this.handleChange}
             />
@@ -118,6 +121,7 @@ class CustomerRegisterForm extends Component {
           </FormGroup>
         </Fieldset>
 
+
         <Fieldset legend="Carteira de Motorista" sublegend="(Obrigatporio para maiores de idade)">
           <DriveLicenceInput
             name="driverLicense"
@@ -125,6 +129,7 @@ class CustomerRegisterForm extends Component {
             onChange={this.handleChange}
           />
         </Fieldset>
+
 
 
         <Fieldset legend='Contatos'>
@@ -145,14 +150,14 @@ class CustomerRegisterForm extends Component {
         </Fieldset>
 
 
-        {/*         <Fieldset legend='Responsável' sublegend='(Obrigatório para menores de idade)'>
+        <Fieldset legend='Responsável' sublegend='(Obrigatório para menores de idade)'>
           <ParentInput
             name="parent"
-            value={parent}
+            parent={parent}
             onChange={this.handleChange}
           />
         </Fieldset>
- */}
+
 
         <div className="form-action">
           <button className="btn btn--block" type="submit">Salvar Cliente</button>

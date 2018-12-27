@@ -12,50 +12,68 @@ class PhoneInput extends Component {
       id: '',
       code: '',
       number: '',
+      name: '',
       destroy: false,
       mainPhone: false
     };
   }
 
- /*  componentWillReceiveProps(nextProps) {
-    if (nextProps.phone && nextProps.phone.id) {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.phone && nextProps.phone.code && nextProps.phone.number) {
       this.setState({
-        ...nextProps.phoneid,
+        ...this.state,
+        ...nextProps.phone,
+        id: nextProps.phone.id,
+        code: nextProps.phone.code,
+        number: nextProps.phone.number,
       });
     }
-  } */
+  }
 
 
-  handleChange = ({ name, value }) => {
+  handleChangeCode = ({ name, value }) => {
     this.setState(
       {
         ...this.state,
-        [name]: value
+        code: value
       },
       () => this.props.onChange({ name: this.props.name, value: this.state })
     );
   }
 
+  handleChangeNumber = ({ name, value }) => {
+    this.setState(
+      {
+        ...this.state,
+        number: value
+      },
+      () => this.props.onChange({ name: this.props.name, value: this.state })
+    );
+  }
+
+
   render() {
-    const { clazz, type, value, code, number, label, errorMsg, showMainPhone } = this.props;
+    const { showMainPhone } = this.props;
+    const { code, number } = this.state;
+
+    const codeProp = this.props.code;
+    const numberProp = this.props.number;
 
     return (
       <div>
         <div className="phones__item">
           <div className="phone">
             <Input
-              name="code"
-              value={code}
+              value={code || codeProp}
               clazz="input phone__code"
               placeholder="88"
-              onChange={this.handleChange}
+              onChange={this.handleChangeCode}
             />
             <Input
-              name="number"
-              value={number}
+              value={number || numberProp}
               clazz="input phone__number"
               placeholder="8888-8888"
-              onChange={this.handleChange}
+              onChange={this.handleChangeNumber}
             />
 
             {showMainPhone && <RadioButton name="mainPhone" label="Principal" onChange={this.handleChange} />}
@@ -74,6 +92,7 @@ PhoneInput.propTypes = {
   code: PropTypes.string,
   number: PropTypes.string,
   value: PropTypes.object,
+  phone: PropTypes.object,
   label: PropTypes.string,
   errorMsg: PropTypes.string
 }
