@@ -6,6 +6,7 @@ import CustomerMidleware from '../../store/modules/customers/middleware';
 import CustomerRegisterHeader from './../../components/ui/CustomerRegisterHeader';
 import CustomerRegisterFeedback from './../../components/ui/CustomerRegisterFeedback';
 import CustomerRegisterForm from './../../components/forms/CustomerRegisterForm';
+import customerCaseParser from '../../utils/customerCaseParser';
 
 
 class CustomerRegister extends Component {
@@ -13,7 +14,7 @@ class CustomerRegister extends Component {
 
   handleSubmit = (customer) => {
     console.log('customer', customer);
-    this.props.saveCustumer(customer)
+    this.props.saveCustumer(customerCaseParser.toServerCase(customer))
   }
 
   render() {
