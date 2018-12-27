@@ -78,7 +78,7 @@ class CustomerRegisterForm extends Component {
             <div className="form-license__inputs">
               <FormGroup>
                 <Input
-                  label="Número"
+                  label={"Número"}
                   name="driver-license-number"
                   errorMsg="Se você Potiguar e sua Licença começa com 6 por favor informe sua Cidade"
                   onChange={this.handleChange}
