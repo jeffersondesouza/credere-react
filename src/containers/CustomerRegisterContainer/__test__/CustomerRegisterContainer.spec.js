@@ -61,47 +61,74 @@ describe('CustomerRegisterContainer />', () => {
 
     });
 
+    context('Submit Customer Form', () => {
+
+      context('when there is an Editing Customer', () => {
+
+        it("should dispatch updateCustomer()", () => {
+          const editingCustomer = {
+            id: '1',
+            driverLicense: {
+              issueAt: '1212-12-12',
+              number: '12222'
+            }
+          };
+
+          const saveCustumer = sinon.stub().withArgs(editingCustomer).returns(Promise.resolve(editingCustomer));
+          const updateCustomer = sinon.stub().withArgs(editingCustomer).returns(Promise.resolve(editingCustomer));
+
+
+          const wrapper = shallow(
+            <CustomerRegister
+              store={store}
+              editingCustomer={editingCustomer}
+              saveCustumer={saveCustumer}
+              updateCustomer={updateCustomer}
+            />
+          );
+
+          const form = wrapper.find('CustomerRegisterForm');
+          form.simulate('submit', { preventDefault() { }, resetForm(){} });
+
+          expect(form.length).to.eql(1);
+          sinon.assert.called(updateCustomer);
+        });
+
+      });
+
+      context('when there is NOT an Editing Customer', () => {
 
 
 
 
-    context('when is creating a custumer', () => {
-      let editingCustomer;
+        it("should dispatch updateCustomer()", () => {
 
-      beforeEach(() => {
-        editingCustomer = {
-          id: '1',
-          driverLicense: {
-            issueAt: '1212-12-12',
-            number: '12222'
-          }
-        };
+          const editingCustomer = {
+            id: '',
+            driverLicense: {
+              issueAt: '1212-12-12',
+              number: '12222'
+            }
+          };
 
-      })
+          const saveCustumer = sinon.stub().withArgs(editingCustomer).returns(Promise.resolve(editingCustomer));
+          const updateCustomer = sinon.stub().withArgs(editingCustomer).returns(Promise.resolve(editingCustomer));
 
-      it("should dispatch updateCustomer()", () => {
+          const wrapper = shallow(
+            <CustomerRegister
+              store={store}
+              editingCustomer={editingCustomer}
+              saveCustumer={saveCustumer}
+              updateCustomer={updateCustomer}
+            />
+          );
 
-        const updateCustomer = sinon.stub().withArgs(editingCustomer).returns(Promise.resolve(updateCustomer));
+          const form = wrapper.find('CustomerRegisterForm');
+          form.simulate('submit', { preventDefault() { }, resetForm(){} });
 
-
-        const wrapper = mount(
-          <CustomerRegister
-            store={store}
-            editingCustomer={editingCustomer}
-            updateCustomer={updateCustomer}
-          />
-        );
-
-        wrapper.instance().handleSubmit(editingCustomer, () => { });
-
-        const form = wrapper.find('form');
-
-        form.simulate('submit', { preventDefault() { } });
-
-        expect(form.length).to.eql(1);
-
-        sinon.assert.called(updateCustomer);
-
+          expect(form.length).to.eql(1);
+          sinon.assert.called(saveCustumer);
+        });
       });
 
     });

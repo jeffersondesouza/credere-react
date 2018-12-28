@@ -91,10 +91,8 @@ class CustomerRegisterForm extends Component {
     const isFormValid = this.validateForm();
 
     if (isFormValid) {
-      // this.props.onSubmit(this.state.custumer, this.resetForm);
-      console.log('this.state.custumer', this.state.custumer);
+      this.props.onSubmit(this.state.custumer, this.resetForm);
     } else {
-
       this.setState({
         formSubmited: true
       });
