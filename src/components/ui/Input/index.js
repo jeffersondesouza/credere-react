@@ -20,7 +20,7 @@ class Input extends Component {
         <label>{label}</label>
         <input
           value={value}
-          name={name || ''}
+          name={name}
           onChange={this.handleChange}
           type={type || 'text'}
           placeholder={placeholder}

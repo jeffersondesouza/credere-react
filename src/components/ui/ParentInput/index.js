@@ -23,13 +23,20 @@ class ParentInput extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.parent && nextProps.parent.phone) {
-
       this.setState({
         ...this.state,
         ...nextProps.parent,
-        phone: { ...nextProps.parent.phone }
       });
-
+    } else {
+      this.setState({
+        id: '',
+        name: '',
+        phone: {
+          id: '',
+          code: '',
+          number: '',
+        }
+      });
     }
   }
 

@@ -15,12 +15,18 @@ export const toServerCase = (data, includeIds) => {
     state: data.bornState
   };
 
+  
   if (!data.id) {
     delete custumerOnServerFormat.id;
   }
-
+  
+  delete custumerOnServerFormat.mainEmail;
+  delete custumerOnServerFormat.mainPhone;
+  delete custumerOnServerFormat.location;
   delete custumerOnServerFormat.driverLicense;
+  delete custumerOnServerFormat.bornState;
 
+  console.log('custumerOnServerFormat', custumerOnServerFormat);
   return custumerOnServerFormat;
 }
 

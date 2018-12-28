@@ -61,13 +61,13 @@ class PhoneInput extends Component {
         <div className="phones__item">
           <div className="phone">
             <Input
-              value={code}
+              value={code || ''}
               clazz="input phone__code"
               placeholder="88"
               onChange={this.handleChangeCode}
             />
             <Input
-              value={number}
+              value={number || ''}
               clazz="input phone__number"
               placeholder="8888-8888"
               onChange={this.handleChangeNumber}

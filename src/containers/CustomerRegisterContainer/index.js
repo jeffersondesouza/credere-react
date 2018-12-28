@@ -12,19 +12,21 @@ import customerCaseParser from '../../utils/customer-case-parser';
 class CustomerRegister extends Component {
 
 
-  handleSubmit = (customer) => {
+  handleSubmit = (customer, resetForm) => {
 
-    console.log('this.props.editingCustomer', this.props.editingCustomer);
     if (this.props.editingCustomer.id) {
       const data = customerCaseParser.toServerCase(customer);
-    //  this.props.updateCustomer(data);
-      console.log('update', data);
+      this.props.updateCustomer(data)
+        .then(() => resetForm());
+
     } else {
       const data = customerCaseParser.toServerCase(customer, true);
-      // this.props.saveCustumer(data);
-      console.log('save', data);
+      this.props.saveCustumer(data)
+        .then(() => resetForm());
     }
   }
+
+
 
   render() {
     return (
@@ -41,8 +43,6 @@ class CustomerRegister extends Component {
     );
   }
 }
-
-
 
 const mapStateToProps = (state) => ({
   ...state.customer

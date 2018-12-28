@@ -17,6 +17,8 @@ class CustomerRegisterForm extends Component {
 
   constructor() {
     super();
+    this.formRef = null;
+
     this.state = {
       custumer: {
         id: '',
@@ -44,6 +46,7 @@ class CustomerRegisterForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
     if (nextProps.editingCustomer && nextProps.editingCustomer.id) {
       const bornState = nextProps.editingCustomer.state;
       delete nextProps.editingCustomer.state;
@@ -51,10 +54,14 @@ class CustomerRegisterForm extends Component {
       this.setState({
         custumer: { ...nextProps.editingCustomer, bornState }
       });
+
+      return;
     }
+
   }
 
   handleChange = ({ name, value }) => {
+
     this.setState({
       custumer: {
         ...this.state.custumer,
@@ -65,7 +72,37 @@ class CustomerRegisterForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.onSubmit(this.state.custumer)
+
+
+    this.props.onSubmit(this.state.custumer, this.resetForm);
+
+  }
+
+  resetForm = () => {
+    this.setState({
+      custumer: {
+        id: '',
+        name: '',
+        birthday: '',
+        bornState: '',
+        city: '',
+        parent: {
+          id: '',
+          name: '',
+          phone: '',
+        },
+        mainEmail: '',
+        mainPhone: '',
+        location: '',
+        driverLicense: {
+          id: '',
+          number: '',
+          issuedAt: '',
+        },
+        phones: [],
+        emails: [],
+      }
+    });
   }
 
   render() {
@@ -74,14 +111,14 @@ class CustomerRegisterForm extends Component {
 
     return (
 
-      <form onSubmit={this.handleSubmit} className="form">
+      <form ref={formRef => this.formRef = formRef} onSubmit={this.handleSubmit} className="form">
         <Fieldset legend="Cliente">
 
           <FormGroup>
             <Input
               label="Nome"
               name="name"
-              value={name}
+              value={name || ''}
               errorMsg="Por favor, informe so nome do cliente"
               onChange={this.handleChange}
             />
@@ -92,7 +129,7 @@ class CustomerRegisterForm extends Component {
               label="Data de Nascimento"
               type="date"
               name="birthday"
-              value={birthday}
+              value={birthday || ''}
               errorMsg="Por favor, informe so nome do cliente"
               onChange={this.handleChange}
             />
@@ -104,7 +141,7 @@ class CustomerRegisterForm extends Component {
             <Input
               label="Estado"
               name="bornState"
-              value={bornState}
+              value={bornState || ''}
               errorMsg="Por favor, informe o estado do Clinete"
               onChange={this.handleChange}
             />
@@ -114,7 +151,7 @@ class CustomerRegisterForm extends Component {
             <Input
               label="Cidade"
               name="city"
-              value={city}
+              value={city || ''}
               errorMsg="Se você Potiguar e sua Licença começa com 6 por favor informe sua Cidade"
               onChange={this.handleChange}
             />

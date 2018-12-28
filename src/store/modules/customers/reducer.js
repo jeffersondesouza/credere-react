@@ -48,6 +48,11 @@ function customerReducer(state = INITIAL_STATE, action) {
 			}
 
 		case ActionTypes.LOAD_CUSTOMERS_SUCCESS:
+		console.log(action);
+		
+		console.log('selectors: ', selectors.mapCustomers(action.payload.customers));
+
+
 			return {
 				...state,
 				customers: selectors.mapCustomers(action.payload.customers),

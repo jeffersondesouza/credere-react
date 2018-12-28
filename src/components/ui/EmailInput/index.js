@@ -35,7 +35,7 @@ class EmailInput extends Component {
         <Input
           name="address"
           type="email"
-          value={value}
+          value={value || ''}
           onChange={this.handleChange}
         />
 

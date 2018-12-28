@@ -10,13 +10,8 @@ class PhonesGroupInput extends Component {
     this.state = {
       phones: [
         { name: `0`, code: '', number: '' }
-
       ]
     };
-  }
-
-  componentDidMount() {
-    // this.addPhoneInput();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -30,11 +25,16 @@ class PhonesGroupInput extends Component {
       this.setState({
         phones
       });
+    } else {
+      this.setState({
+        phones: [
+          { name: `0`, code: '', number: '' }
+        ]
+      })
     }
   }
 
   handleChange = ({ name, value }) => {
-    console.log('name, value', name, value);
 
     const phones = this.state.phones
       .map(phone => {
@@ -54,7 +54,6 @@ class PhonesGroupInput extends Component {
   }
 
   addPhoneInput = () => {
-    console.log('addPhoneInput');
 
     const phones = [
       ...this.state.phones,
@@ -67,7 +66,6 @@ class PhonesGroupInput extends Component {
 
   render() {
     const { phones } = this.state;
-    console.log('this.state', this.state);
     return (
       <div>
         <ul>
@@ -77,7 +75,6 @@ class PhonesGroupInput extends Component {
                 <PhoneInput
                   name={`${i}`}
                   phone={phone}
-
                   onChange={this.handleChange} />
               </li>
             )

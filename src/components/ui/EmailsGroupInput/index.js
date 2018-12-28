@@ -8,14 +8,10 @@ class EmailsGroupInput extends Component {
   constructor() {
     super();
     this.state = {
-      emailInputs: []
+      emailInputs: [{ name: '0', address: '' }]
     };
   }
 
-
-  componentDidMount() {
-    this.addEmailInput();
-  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.value && nextProps.value.length) {
@@ -28,6 +24,10 @@ class EmailsGroupInput extends Component {
       this.setState({
         emailInputs: [...emails]
       });
+    } else {
+      this.setState({
+        emailInputs: [{ name: '0', address: '' }]
+      })
     }
   }
 
@@ -60,7 +60,6 @@ class EmailsGroupInput extends Component {
 
 
   render() {
-    const { clazz, type, value, label, errorMsg, } = this.props;
     const { emailInputs } = this.state;
 
     return (
@@ -70,9 +69,10 @@ class EmailsGroupInput extends Component {
             emailInputs.map((email, i) =>
               <li key={i}>
                 <EmailInput
-                  name={email.name}
+                  name={`${i}`}
                   value={email.address}
-                  onChange={this.handleChange} />
+                  onChange={this.handleChange}
+                />
               </li>)
           }
         </ul>

@@ -15,7 +15,7 @@ class DriveLicenceInput extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.value && nextProps.value.id) {
+    if (nextProps.value) {
       this.setState({
         id: nextProps.value.id,
         number: nextProps.value.number,
@@ -41,7 +41,7 @@ class DriveLicenceInput extends Component {
             <Input
               label="Número"
               name="number"
-              value={number}
+              value={number || ''}
               errorMsg="Se você Potiguar e sua Licença começa com 6 por favor informe sua Cidade"
               onChange={this.handleChange}
             />
@@ -50,7 +50,7 @@ class DriveLicenceInput extends Component {
             label="Data de Emissão"
             type="date"
             name="issueAt"
-            value={issueAt}
+            value={issueAt || ''}
             errorMsg="Por favor informe os dados de Sua Carteira de Motorista"
             onChange={this.handleChange}
           />
