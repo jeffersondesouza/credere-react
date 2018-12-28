@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RadioButton from '../RadioButton';
 import Input from '../Input';
+import RemoveButton from '../RemoveButton';
 
 class EmailInput extends Component {
 
@@ -17,7 +18,7 @@ class EmailInput extends Component {
   }
 
 
-  handleChange = ({name, value}) => {
+  handleChange = ({ name, value }) => {
     this.setState({
       ...this.state,
       [name]: value
@@ -26,11 +27,31 @@ class EmailInput extends Component {
     );
   }
 
+  handleChangeMainEmail = ({ value }) => {
+    this.setState({
+      mainEmail: value
+    },
+      () => this.props.onChange({
+        name: this.props.name,
+        value: { ...this.props, mainEmail: value }
+      })
+    );
+  }
 
+  handleRemoveClick = () => {
+
+    this.setState({
+      ...this.state,
+      destroy: true
+    },
+      () => this.props.onChange({ name: this.props.name, value: this.state })
+    );
+  }
   render() {
     const { value } = this.props;
+    const { destroy, mainEmail } = this.state;
 
-    return (
+    return (!destroy &&
       <div className="emails__item">
         <Input
           name="address"
@@ -39,8 +60,13 @@ class EmailInput extends Component {
           onChange={this.handleChange}
         />
 
-        <RadioButton name="mainPhone" label="Principal" onChange={this.handleChange} />
-        <input onChange={this.handleChange} type="checkbox" className="emails__item-remove" />
+        <RadioButton
+          name="mainEmail"
+          label="Principal"
+          onChange={this.handleChangeMainEmail}
+        />
+
+        <RemoveButton onClick={this.handleRemoveClick} />
 
       </div>
     );
