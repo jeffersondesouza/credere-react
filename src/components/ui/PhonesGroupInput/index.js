@@ -66,6 +66,8 @@ class PhonesGroupInput extends Component {
 
   render() {
     const { phones } = this.state;
+    const { validaion } = this.props;
+    console.log('validaion', validaion);
     return (
       <div>
         <ul>
@@ -75,13 +77,14 @@ class PhonesGroupInput extends Component {
                 <PhoneInput
                   name={`${i}`}
                   phone={phone}
+                  valid={validaion.phoneValid}
                   onChange={this.handleChange} />
               </li>
             )
           }
         </ul>
-        <p className="feedback-error">Por favor, informe pelo menos um telefone</p>
-        <p className="feedback-error">Você pode cadastrar no máxio 4 (quatro) telefones</p>
+        {!validaion.minPhoneValid && <p className="feedback-error">Por favor, informe pelo menos um telefone</p>}
+        {!validaion.maxPhoneValid && <p className="feedback-error">Você pode cadastrar no máxio 4 (quatro) telefones</p> }
         <AddMoreButton onClick={this.addPhoneInput} />
       </div>
     );

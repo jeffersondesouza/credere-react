@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-
 import './style/CustomerRegisterForm.scss';
 
 import Fieldset from '../../ui/Fieldset';
@@ -12,6 +11,35 @@ import EmailsGroupInput from '../../ui/EmailsGroupInput';
 import ParentInput from '../../ui/ParentInput';
 import DriveLicenceInput from '../../ui/DriveLicenceInput';
 
+import { isNameValid, isBirthDayValid, isStateValid, isCityValid, isLicenseValid, isPhonesValid } from '../../../utils/customer-form-validator';
+
+
+const initialState = {
+
+  custumer: {
+    id: '',
+    name: '',
+    birthday: '',
+    bornState: '',
+    city: '',
+    parent: {
+      id: '',
+      name: '',
+      phone: '',
+    },
+    mainEmail: '',
+    mainPhone: '',
+    location: '',
+    driverLicense: {
+      id: '',
+      number: '',
+      issuedAt: '',
+    },
+    phones: [],
+    emails: [],
+  }
+}
+
 
 class CustomerRegisterForm extends Component {
 
@@ -19,30 +47,7 @@ class CustomerRegisterForm extends Component {
     super();
     this.formRef = null;
 
-    this.state = {
-      custumer: {
-        id: '',
-        name: '',
-        birthday: '',
-        bornState: '',
-        city: '',
-        parent: {
-          id: '',
-          name: '',
-          phone: '',
-        },
-        mainEmail: '',
-        mainPhone: '',
-        location: '',
-        driverLicense: {
-          id: '',
-          number: '',
-          issuedAt: '',
-        },
-        phones: [],
-        emails: [],
-      }
-    };
+    this.state = { ...initialState };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -79,30 +84,7 @@ class CustomerRegisterForm extends Component {
   }
 
   resetForm = () => {
-    this.setState({
-      custumer: {
-        id: '',
-        name: '',
-        birthday: '',
-        bornState: '',
-        city: '',
-        parent: {
-          id: '',
-          name: '',
-          phone: '',
-        },
-        mainEmail: '',
-        mainPhone: '',
-        location: '',
-        driverLicense: {
-          id: '',
-          number: '',
-          issuedAt: '',
-        },
-        phones: [],
-        emails: [],
-      }
-    });
+    this.setState(initialState);
   }
 
   render() {
@@ -120,6 +102,7 @@ class CustomerRegisterForm extends Component {
               name="name"
               value={name || ''}
               errorMsg="Por favor, informe so nome do cliente"
+              valid={isNameValid(name)}
               onChange={this.handleChange}
             />
           </FormGroup>
@@ -130,18 +113,18 @@ class CustomerRegisterForm extends Component {
               type="date"
               name="birthday"
               value={birthday || ''}
+              valid={isBirthDayValid(birthday)}
               errorMsg="Por favor, informe so nome do cliente"
               onChange={this.handleChange}
             />
           </FormGroup>
-
-
 
           <FormGroup >
             <Input
               label="Estado"
               name="bornState"
               value={bornState || ''}
+              valid={isStateValid(bornState)}
               errorMsg="Por favor, informe o estado do Clinete"
               onChange={this.handleChange}
             />
@@ -152,6 +135,7 @@ class CustomerRegisterForm extends Component {
               label="Cidade"
               name="city"
               value={city || ''}
+              valid={isCityValid(city, bornState, driverLicense.number)}
               errorMsg="Se você Potiguar e sua Licença começa com 6 por favor informe sua Cidade"
               onChange={this.handleChange}
             />
@@ -163,6 +147,7 @@ class CustomerRegisterForm extends Component {
           <DriveLicenceInput
             name="driverLicense"
             value={driverLicense}
+            valid={isLicenseValid(birthday, driverLicense.number, driverLicense.issuedAt)}
             onChange={this.handleChange}
           />
         </Fieldset>
@@ -175,6 +160,7 @@ class CustomerRegisterForm extends Component {
               name="phones"
               phones={phones}
               onChange={this.handleChange}
+              validaion={isPhonesValid(phones)}
             />
           </FormGroup>
           <FormGroup label="Emails">
@@ -212,3 +198,6 @@ CustomerRegisterForm.propTypes = {
 }
 
 export default CustomerRegisterForm;
+
+
+

@@ -13,7 +13,7 @@ class Input extends Component {
   }
 
   render() {
-    const { clazz, type, name, value, placeholder, label, errorMsg, } = this.props;
+    const { clazz, type, name, value, placeholder, label, errorMsg, valid } = this.props;
 
     return (
       <div className="input-div">
@@ -25,7 +25,7 @@ class Input extends Component {
           type={type || 'text'}
           placeholder={placeholder}
           className={clazz || 'input'} />
-        <p className="feedback-error">{errorMsg}</p>
+        {!valid && <p className="feedback-error">{errorMsg}</p>}
       </div>
     );
   }

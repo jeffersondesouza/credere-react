@@ -33,6 +33,7 @@ class DriveLicenceInput extends Component {
 
   render() {
     const { number, issueAt } = this.state;
+    const {  valid } = this.props;
 
     return (
       <div className="form-license">
@@ -42,7 +43,6 @@ class DriveLicenceInput extends Component {
               label="Número"
               name="number"
               value={number || ''}
-              errorMsg="Se você Potiguar e sua Licença começa com 6 por favor informe sua Cidade"
               onChange={this.handleChange}
             />
           </FormGroup>
@@ -51,6 +51,7 @@ class DriveLicenceInput extends Component {
             type="date"
             name="issueAt"
             value={issueAt || ''}
+            valid={valid}
             errorMsg="Por favor informe os dados de Sua Carteira de Motorista"
             onChange={this.handleChange}
           />

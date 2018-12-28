@@ -24,8 +24,8 @@ class PhoneInput extends Component {
       this.setState({
         ...this.state,
         ...nextProps.phone,
-      }, ()=>{
-        
+      }, () => {
+
       });
     }
   }
@@ -53,7 +53,7 @@ class PhoneInput extends Component {
 
 
   render() {
-    const { showMainPhone } = this.props;
+    const { showMainPhone, valid } = this.props;
     const { code, number } = this.props.phone;
 
     return (
@@ -78,7 +78,7 @@ class PhoneInput extends Component {
           </div>
           <input onChange={this.handleChange} type="checkbox" className="phones__remove-check" />
         </div>
-        <p className="feedback-error">Por favor, informe o DDD e número</p>
+        {!valid && <p className="feedback-error">Por favor, informe o DDD e número</p>}
       </div>
     );
   }
