@@ -2,16 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FormGroup from '../FormGroup';
 import Input from '../Input';
+import RemoveButton from '../RemoveButton';
+
+
+const INITIAL_STATE = {
+  id: '',
+  number: '',
+  issueAt: '',
+  destroy: false
+};
 
 class DriveLicenceInput extends Component {
 
   constructor() {
     super();
-    this.state = {
-      id: '',
-      number: '',
-      issueAt: ''
-    };
+    this.state = { INITIAL_STATE };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -27,13 +32,30 @@ class DriveLicenceInput extends Component {
   handleChange = ({ name, value }) => {
     this.setState(
       { [name]: value },
-      () => this.props.onChange({ name: this.props.name, value: this.state })
+      () => this.props.onChange({
+        name: this.props.name,
+        value: this.state,
+        destroy: false
+      })
+    );
+  }
+
+
+  handleRemoveClick = () => {
+    this.setState({
+      ...INITIAL_STATE
+    },
+      () => this.props.onChange({
+        name: this.props.name,
+        value: this.state,
+        destroy: true,
+      })
     );
   }
 
   render() {
     const { number, issueAt } = this.state;
-    const {  valid } = this.props;
+    const { valid } = this.props;
 
     return (
       <div className="form-license">
@@ -56,11 +78,9 @@ class DriveLicenceInput extends Component {
             onChange={this.handleChange}
           />
         </div>
+
         <div className="form-license__delete">
-          <label className="btn--icon-label">
-            <input onChange={this.handleChange} id="licenseDestroy" type="checkbox" name="licenseDestroy" />
-            <i className="icon-trash icon--danger"></i>
-          </label>
+          <RemoveButton onClick={this.handleRemoveClick} />
         </div>
       </div>
 

@@ -57,5 +57,9 @@
   }
   &--remove {
     color: $red !important;
+    .icon-trash{
+      font-size: 2rem !important;
+
+    }
   }
 }
