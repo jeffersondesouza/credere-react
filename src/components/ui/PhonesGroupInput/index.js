@@ -79,6 +79,7 @@ class PhonesGroupInput extends Component {
                   phone={phone}
                   valid={validation.phoneValid || !formSubmited}
                   showMainPhone={true}
+                  showBtnDestroy={true}
                   onChange={this.handleChange} />
               </li>
             )

@@ -72,7 +72,7 @@ class PhoneInput extends Component {
 
 
   render() {
-    const { showMainPhone, valid } = this.props;
+    const { showMainPhone, showBtnDestroy, valid } = this.props;
     const { code, number } = this.props.phone;
     const { destroy } = this.state;
 
@@ -94,9 +94,9 @@ class PhoneInput extends Component {
             />
 
             {showMainPhone && <RadioButton name="mainPhone" label="Principal" onChange={this.handleChangeMainPhone} />}
-
           </div>
-          <RemoveButton onClick={this.handleRemoveClick} />
+
+          {showBtnDestroy && <RemoveButton onClick={this.handleRemoveClick} />}
         </div>
         {!valid && <p className="feedback-error">Por favor, informe o DDD e número</p>}
       </div>

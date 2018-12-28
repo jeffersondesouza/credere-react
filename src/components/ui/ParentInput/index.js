@@ -4,20 +4,25 @@ import Input from '../Input';
 
 import PhoneInput from '../PhoneInput';
 import FormGroup from '../FormGroup';
+import RemoveButton from '../RemoveButton';
+
+
+const INITIAL_STATE = {
+  id: '',
+  name: '',
+  phone: {
+    id: '',
+    code: '',
+    number: '',
+  }
+};
+
 
 class ParentInput extends Component {
 
   constructor() {
     super();
-    this.state = {
-      id: '',
-      name: '',
-      phone: {
-        id: '',
-        code: '',
-        number: '',
-      }
-    };
+    this.state = INITIAL_STATE;
   }
 
 
@@ -28,15 +33,7 @@ class ParentInput extends Component {
         ...nextProps.parent,
       });
     } else {
-      this.setState({
-        id: '',
-        name: '',
-        phone: {
-          id: '',
-          code: '',
-          number: '',
-        }
-      });
+      this.setState({ ...INITIAL_STATE });
     }
   }
 
@@ -45,10 +42,21 @@ class ParentInput extends Component {
     this.setState(
       { [name]: value },
       () => {
-          this.props.onChange({ name: this.props.name, value: this.state })
+        this.props.onChange({ name: this.props.name, value: this.state })
       });
   }
 
+  handleRemoveClick = () => {
+    this.setState({
+      ...INITIAL_STATE
+    },
+      () => this.props.onChange({
+        name: this.props.name,
+        value: this.state,
+        destroy: true,
+      })
+    );
+  }
 
   render() {
     const { name, phone } = this.state;
@@ -77,10 +85,7 @@ class ParentInput extends Component {
 
         </div>
         <div className="form-parent__delete">
-          <label className="btn--icon-label ">
-            <input onChange={this.handleChange} id="licenseDestroy" type="checkbox" name="parentDestroy" />
-            <i className="icon-trash icon--danger"></i>
-          </label>
+          <RemoveButton onClick={this.handleRemoveClick} />
         </div>
       </div>
     );
