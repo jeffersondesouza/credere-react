@@ -11,7 +11,7 @@ import EmailsGroupInput from '../../ui/EmailsGroupInput';
 import ParentInput from '../../ui/ParentInput';
 import DriveLicenceInput from '../../ui/DriveLicenceInput';
 
-import { isNameValid, isBirthDayValid, isStateValid, isCityValid, isLicenseValid, isPhonesValid } from '../../../utils/customer-form-validator';
+import { isFormValid, isNameValid, isBirthDayValid, isStateValid, isCityValid, isLicenseValid, isPhonesValid, isEmailsValid, isParentValid } from '../../../utils/customer-form-validator';
 
 
 const initialState = {
@@ -37,7 +37,18 @@ const initialState = {
     },
     phones: [],
     emails: [],
-  }
+  },
+  validation: {
+    nameValid: false,
+    birthdayValid: false,
+    cityValid: false,
+    bornStateValid: false,
+    driverLicenseValid: false,
+    phonesValid: { maxPhoneValid: false, minPhoneValid: false, phoneValid: false },
+    emailsValid: { minEmailValid: false, maxEmailValid: false },
+    parentValid: { parentNameValid: false, parentPhoneValid: false }
+  },
+  formSubmited: false
 }
 
 
@@ -79,7 +90,38 @@ class CustomerRegisterForm extends Component {
     e.preventDefault();
 
 
-    this.props.onSubmit(this.state.custumer, this.resetForm);
+    const isFormValid = this.validateForm();
+
+    if (isFormValid) {
+      this.props.onSubmit(this.state.custumer, this.resetForm);
+    } else {
+
+      this.setState({
+        formSubmited: true
+      });
+    }
+
+  }
+
+  validateForm = () => {
+
+    const { name, birthday, phones, city, driverLicense, bornState, emails, parent } = this.state.custumer;
+
+    const validation = {
+      nameValid: isNameValid(name),
+      birthdayValid: isBirthDayValid(birthday),
+      phonesValid: isPhonesValid(phones),
+      cityValid: isCityValid(city, bornState, driverLicense.number),
+      driverLicenseValid: isLicenseValid(birthday, driverLicense.number, driverLicense.issueAt),
+      bornStateValid: isStateValid(bornState),
+      emailsValid: isEmailsValid(emails),
+      parentValid: isParentValid(birthday, parent.name, parent.phone)
+    }
+
+
+    this.setState({ validation });
+
+    return isFormValid(validation);
 
   }
 
@@ -90,6 +132,9 @@ class CustomerRegisterForm extends Component {
   render() {
 
     const { name, birthday, phones, city, driverLicense, bornState, emails, parent } = this.state.custumer;
+    const { nameValid, birthdayValid, phonesValid, cityValid, driverLicenseValid, bornStateValid, emailsValid, parentValid } = this.state.validation;
+
+    const formSubmited = this.state.formSubmited;
 
     return (
 
@@ -102,7 +147,7 @@ class CustomerRegisterForm extends Component {
               name="name"
               value={name || ''}
               errorMsg="Por favor, informe so nome do cliente"
-              valid={isNameValid(name)}
+              valid={!formSubmited || nameValid}
               onChange={this.handleChange}
             />
           </FormGroup>
@@ -113,7 +158,7 @@ class CustomerRegisterForm extends Component {
               type="date"
               name="birthday"
               value={birthday || ''}
-              valid={isBirthDayValid(birthday)}
+              valid={!formSubmited || birthdayValid}
               errorMsg="Por favor, informe so nome do cliente"
               onChange={this.handleChange}
             />
@@ -124,7 +169,7 @@ class CustomerRegisterForm extends Component {
               label="Estado"
               name="bornState"
               value={bornState || ''}
-              valid={isStateValid(bornState)}
+              valid={!formSubmited || bornStateValid}
               errorMsg="Por favor, informe o estado do Clinete"
               onChange={this.handleChange}
             />
@@ -135,7 +180,7 @@ class CustomerRegisterForm extends Component {
               label="Cidade"
               name="city"
               value={city || ''}
-              valid={isCityValid(city, bornState, driverLicense.number)}
+              valid={!formSubmited || cityValid}
               errorMsg="Se você Potiguar e sua Licença começa com 6 por favor informe sua Cidade"
               onChange={this.handleChange}
             />
@@ -147,12 +192,10 @@ class CustomerRegisterForm extends Component {
           <DriveLicenceInput
             name="driverLicense"
             value={driverLicense}
-            valid={isLicenseValid(birthday, driverLicense.number, driverLicense.issuedAt)}
+            valid={!formSubmited || driverLicenseValid}
             onChange={this.handleChange}
           />
         </Fieldset>
-
-
 
         <Fieldset legend='Contatos'>
           <FormGroup label="Telefones">
@@ -160,7 +203,8 @@ class CustomerRegisterForm extends Component {
               name="phones"
               phones={phones}
               onChange={this.handleChange}
-              validaion={isPhonesValid(phones)}
+              validation={phonesValid}
+              formSubmited={formSubmited}
             />
           </FormGroup>
           <FormGroup label="Emails">
@@ -168,6 +212,8 @@ class CustomerRegisterForm extends Component {
               name="emails"
               value={emails}
               onChange={this.handleChange}
+              validation={emailsValid}
+              formSubmited={formSubmited}
             />
           </FormGroup>
         </Fieldset>
@@ -178,6 +224,8 @@ class CustomerRegisterForm extends Component {
             name="parent"
             parent={parent}
             onChange={this.handleChange}
+            validation={parentValid}
+            formSubmited={formSubmited}
           />
         </Fieldset>
 

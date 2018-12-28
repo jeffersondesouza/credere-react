@@ -43,8 +43,9 @@ class EmailsGroupInput extends Component {
     this.setState({
       emailInputs: [...emails]
     },
-      () => this.props.onChange({ name: this.props.name, value: this.state.emailInputs })
-    );
+      () => {
+        this.props.onChange({ name: this.props.name, value: this.state.emailInputs })
+      });
 
   }
 
@@ -61,6 +62,7 @@ class EmailsGroupInput extends Component {
 
   render() {
     const { emailInputs } = this.state;
+    const { validation, formSubmited } = this.props;
 
     return (
       <div>
@@ -76,8 +78,8 @@ class EmailsGroupInput extends Component {
               </li>)
           }
         </ul>
-        <p className="feedback-error">Por favor, informe pelo menos um telefone</p>
-        <p className="feedback-error">Você pode cadastrar no máxio 4 (quatro) telefones</p>
+        {(!validation.minEmailValid && formSubmited) && <p className="feedback-error">Por favor, informe pelo menos um email</p>}
+        {(!validation.maxEmailValid && formSubmited) && <p className="feedback-error">Você pode cadastrar no máxio 3 (três) emails</p>}
         <AddMoreButton onClick={this.addEmailInput} />
       </div>
     );

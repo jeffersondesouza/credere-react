@@ -26,7 +26,6 @@ export const toServerCase = (data, includeIds) => {
   delete custumerOnServerFormat.driverLicense;
   delete custumerOnServerFormat.bornState;
 
-  console.log('custumerOnServerFormat', custumerOnServerFormat);
   return custumerOnServerFormat;
 }
 

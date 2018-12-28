@@ -1,5 +1,23 @@
 import dateCoverter from "./date-coverter";
 
+export const isFormValid = (formValue) => {
+  return formValue.nameValid
+    && formValue.birthdayValid
+    && formValue.cityValid
+    && formValue.driverLicenseValid
+    && formValue.bornStateValid
+
+    && formValue.phonesValid.maxPhoneValid
+    && formValue.phonesValid.minPhoneValid
+    && formValue.phonesValid.phoneValid
+
+    && formValue.emailsValid.minEmailValid
+    && formValue.emailsValid.maxEmailValid
+
+    && formValue.parentValid.parentNameValid
+    && formValue.parentValid.parentPhoneValid;
+}
+
 export const isNameValid = (name) => {
   if (name) {
     return true;
@@ -48,7 +66,7 @@ export const isCityValid = (cityEl, stateValue, licenseNumber, ) => {
     return true;
   }
 
-  const firstLicenseNumber = +`${formModel.licenseNumberEl.value}`[0];
+  const firstLicenseNumber = +`${licenseNumber}`[0];
   const isRn = stateValue.toLowerCase() === 'rn';
 
   if (!cityEl && isRn && (firstLicenseNumber === 6)) {
@@ -61,7 +79,7 @@ export const isCityValid = (cityEl, stateValue, licenseNumber, ) => {
 
 export const isPhonesValid = (phonesList) => {
   const phones = phonesList
-  .filter(phone => !phone.destroy);
+    .filter(phone => !phone.destroy);
 
   let maxPhoneValid = true;
   let minPhoneValid = true;
@@ -108,9 +126,7 @@ export const isEmailsValid = (emailList) => {
 }
 
 
-export const isParentValid = (birthdayEl, parentNameEl, parentPhoneCodeEl, parentPhoneNumberEl) => {
-  let nameError = false;
-  let phoneError = false;
+export const isParentValid = (birthdayEl, parentNameEl, phone) => {
 
   let parentNameValid = true;
   let parentPhoneValid = true;
@@ -128,7 +144,7 @@ export const isParentValid = (birthdayEl, parentNameEl, parentPhoneCodeEl, paren
     parentNameValid = true;
   }
 
-  if (!parentPhoneCodeEl || !parentPhoneNumberEl) {
+  if (!phone.code || !phone.number) {
     parentPhoneValid = false;
   } else {
     parentPhoneValid = true;
@@ -139,6 +155,7 @@ export const isParentValid = (birthdayEl, parentNameEl, parentPhoneCodeEl, paren
 
 
 export default {
+  isFormValid,
   isNameValid,
   isBirthDayValid,
   isLicenseValid,

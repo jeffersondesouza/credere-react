@@ -44,14 +44,15 @@ class ParentInput extends Component {
   handleChange = ({ name, value }) => {
     this.setState(
       { [name]: value },
-      () => this.props.onChange({ name: this.props.name, value: this.state })
-    );
+      () => {
+          this.props.onChange({ name: this.props.name, value: this.state })
+      });
   }
 
 
   render() {
     const { name, phone } = this.state;
-
+    const { validation, formSubmited } = this.props;
     return (
       <div className="form-parent">
         <div className="form-parent__inputs">
@@ -60,6 +61,7 @@ class ParentInput extends Component {
               name="name"
               value={name}
               errorMsg="Por favor, informe o nome do seu responsável"
+              valid={validation.parentNameValid || !formSubmited}
               onChange={this.handleChange}
             />
           </FormGroup>
@@ -69,6 +71,7 @@ class ParentInput extends Component {
               name="phone"
               phone={phone}
               onChange={this.handleChange}
+              valid={validation.parentPhoneValid || !formSubmited}
               showMainPhone={false} />
           </FormGroup>
 
@@ -88,7 +91,8 @@ ParentInput.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.object,
   parent: PropTypes.object,
-  errorMsg: PropTypes.string
+  errorMsg: PropTypes.string,
+  validation: PropTypes.object
 }
 
 
