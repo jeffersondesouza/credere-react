@@ -1,0 +1,12 @@
+@import '../../../style/sass/abstracts/variables';
+@import '../../../style/sass/abstracts/mixins';
+.email-input {
+  align-items: center;
+  display: flex;
+  margin-bottom: 1rem;
+  position: relative;
+  &__wrapper{
+    background: red; 
+    flex-grow: 1;
+  }
+}

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+import './styles.scss';
+
 import RadioButton from '../RadioButton';
 import Input from '../Input';
 import RemoveButton from '../RemoveButton';
@@ -52,22 +55,21 @@ class EmailInput extends Component {
     const { destroy, mainEmail } = this.state;
 
     return (!destroy &&
-      <div className="emails__item">
-        <Input
-          name="address"
-          type="email"
-          value={value || ''}
-          onChange={this.handleChange}
-        />
-
+      <div className="email-input">
+        <div className="email-input__wrapper">
+          <Input
+            name="address"
+            type="email"
+            value={value || ''}
+            onChange={this.handleChange}
+          />
+        </div>
         <RadioButton
           name="mainEmail"
           label="Principal"
           onChange={this.handleChangeMainEmail}
         />
-
         <RemoveButton onClick={this.handleRemoveClick} />
-
       </div>
     );
   }
