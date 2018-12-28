@@ -49,6 +49,16 @@ class PhoneInput extends Component {
     );
   }
 
+  handleChangeMainPhone = ({ name, value }) => {
+    this.setState(
+      {
+        ...this.state,
+        mainPhone: value
+      },
+      () => this.props.onChange({ name: this.props.name, value: this.state })
+    );
+  }
+
   handleRemoveClick = () => {
  
     this.setState(
@@ -83,7 +93,7 @@ class PhoneInput extends Component {
               onChange={this.handleChangeNumber}
             />
 
-            {showMainPhone && <RadioButton name="mainPhone" label="Principal" onChange={this.handleChange} />}
+            {showMainPhone && <RadioButton name="mainPhone" label="Principal" onChange={this.handleChangeMainPhone} />}
 
           </div>
           <RemoveButton onClick={this.handleRemoveClick} />

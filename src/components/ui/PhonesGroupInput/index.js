@@ -78,6 +78,7 @@ class PhonesGroupInput extends Component {
                   name={`${i}`}
                   phone={phone}
                   valid={validation.phoneValid || !formSubmited}
+                  showMainPhone={true}
                   onChange={this.handleChange} />
               </li>
             )
