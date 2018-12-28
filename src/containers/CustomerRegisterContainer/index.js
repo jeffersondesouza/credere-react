@@ -9,7 +9,7 @@ import CustomerRegisterForm from './../../components/forms/CustomerRegisterForm'
 import customerCaseParser from '../../utils/customer-case-parser';
 
 
-class CustomerRegister extends Component {
+export class CustomerRegister extends Component {
 
 
   handleSubmit = (customer, resetForm) => {
