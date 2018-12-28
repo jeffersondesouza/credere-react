@@ -9,7 +9,7 @@ class PhonesGroupInput extends Component {
     super();
     this.state = {
       phones: [
-        { name: `0`, code: '', number: '' }
+        { name: `0`, code: '', number: '', destroy: false }
       ]
     };
   }
@@ -25,10 +25,11 @@ class PhonesGroupInput extends Component {
       this.setState({
         phones
       });
+      
     } else {
       this.setState({
         phones: [
-          { name: `0`, code: '', number: '' }
+          { name: `0`, code: '', number: '', destroy: false }
         ]
       })
     }
@@ -57,7 +58,7 @@ class PhonesGroupInput extends Component {
 
     const phones = [
       ...this.state.phones,
-      { name: `${this.state.phones.length++}`, code: '', number: '' }
+      { name: `${this.state.phones.length++}`, code: '', number: '', destroy: false }
     ];
 
     this.setState({ phones });
@@ -83,7 +84,7 @@ class PhonesGroupInput extends Component {
           }
         </ul>
         {(!validation.minPhoneValid && formSubmited) && <p className="feedback-error">Por favor, informe pelo menos um telefone</p>}
-        {(!validation.maxPhoneValid && formSubmited) && <p className="feedback-error">Você pode cadastrar no máxio 4 (quatro) telefones</p> }
+        {(!validation.maxPhoneValid && formSubmited) && <p className="feedback-error">Você pode cadastrar no máxio 4 (quatro) telefones</p>}
         <AddMoreButton onClick={this.addPhoneInput} />
       </div>
     );

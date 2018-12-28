@@ -66,11 +66,9 @@ class CustomerRegisterForm extends Component {
     if (nextProps.editingCustomer && nextProps.editingCustomer.id) {
       const bornState = nextProps.editingCustomer.state;
       delete nextProps.editingCustomer.state;
-
       this.setState({
         custumer: { ...nextProps.editingCustomer, bornState }
       });
-
       return;
     }
 
@@ -93,7 +91,8 @@ class CustomerRegisterForm extends Component {
     const isFormValid = this.validateForm();
 
     if (isFormValid) {
-      this.props.onSubmit(this.state.custumer, this.resetForm);
+      // this.props.onSubmit(this.state.custumer, this.resetForm);
+      console.log('this.state.custumer', this.state.custumer);
     } else {
 
       this.setState({

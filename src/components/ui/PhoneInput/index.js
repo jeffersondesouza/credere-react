@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Input from '../Input';
 import RadioButton from '../RadioButton';
+import RemoveButton from '../RemoveButton';
 
 class PhoneInput extends Component {
 
@@ -24,12 +25,9 @@ class PhoneInput extends Component {
       this.setState({
         ...this.state,
         ...nextProps.phone,
-      }, () => {
-
       });
     }
   }
-
 
   handleChangeCode = ({ name, value }) => {
     this.setState(
@@ -51,12 +49,24 @@ class PhoneInput extends Component {
     );
   }
 
+  handleRemoveClick = () => {
+ 
+    this.setState(
+      {
+        ...this.state,
+        destroy: true
+      },
+      () => this.props.onChange({ name: this.props.name, value: this.state })
+    );
+  }
+
 
   render() {
     const { showMainPhone, valid } = this.props;
     const { code, number } = this.props.phone;
+    const { destroy } = this.state;
 
-    return (
+    return (!destroy &&
       <div>
         <div className="phones__item">
           <div className="phone">
@@ -76,7 +86,7 @@ class PhoneInput extends Component {
             {showMainPhone && <RadioButton name="mainPhone" label="Principal" onChange={this.handleChange} />}
 
           </div>
-          <input onChange={this.handleChange} type="checkbox" className="phones__remove-check" />
+          <RemoveButton onClick={this.handleRemoveClick} />
         </div>
         {!valid && <p className="feedback-error">Por favor, informe o DDD e número</p>}
       </div>
