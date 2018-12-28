@@ -1,12 +1,21 @@
 import dateCoverter from "../../../../utils/date-coverter";
 
 const selectMainPhone = (phones) => {
+  if (!phones || !phones.length) {
+    return 'Nnenhum telefone cadastrado';
+  }
+
   const mainPhone = phones.find(phone => phone.main) || phones[0];
   return `(${mainPhone.code}) - ${mainPhone.number}`;
 }
 
 function selectMainEmail(emails) {
+
+  if (!emails || !emails.length) {
+    return 'Nnenhum email cadastrado';
+  }
   const mainEmail = emails.find(email => email.main) || emails[0];
+
   return mainEmail.address;
 }
 

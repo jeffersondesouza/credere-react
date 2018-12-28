@@ -240,7 +240,7 @@ describe('Customers MIDLEWARE', () => {
                 id: 1,
                 name: 'jonh',
             }
-            CustomerMidleware.selectCustomerToUpdate(user )(() => { });
+            CustomerMidleware.selectCustomerToUpdate(user)(() => { });
 
             sinon.assert.calledWith(spyRequest, user);
 

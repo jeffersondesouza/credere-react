@@ -5,7 +5,7 @@ import CustomerMidleware from '../../store/modules/customers/middleware';
 
 import CustomerList from './../../components/lists/CustomerList';
 
-class CustomerListComponent extends Component {
+export class CustomerListComponent extends Component {
 
   componentDidMount() {
     if (!this.props.isDeletingCustomer) {
@@ -29,7 +29,7 @@ class CustomerListComponent extends Component {
   }
 
   render() {
-    const { customers } = this.props;
+    const { customers, show } = this.props;
     return (
       <section id="customers-view" className="customers-block">
         <CustomerList
