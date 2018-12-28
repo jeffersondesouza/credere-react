@@ -99,8 +99,6 @@ describe('CustomerListContainer />', () => {
         const dispatchDeleteCustumer = sinon.spy();
         const dispatchGetCustumers = sinon.spy();
 
-       
-
         const customers = [{ id: 1 }];
 
         const wrapper = shallow(
@@ -121,9 +119,6 @@ describe('CustomerListContainer />', () => {
     context('CustomerListContainer.isDeletingCustomer is true', () => {
 
       it("should NOT dispatchDeleteCustumer", () => {
-        const confirmStub = sinon.stub(window, 'confirm');
-        confirmStub.resolves().alwaysReturned(true);
-
 
         const dispatchDeleteCustumer = sinon.spy();
         const dispatchGetCustumers = sinon.spy();
