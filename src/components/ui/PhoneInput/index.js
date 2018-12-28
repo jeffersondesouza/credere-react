@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import './styles.scss'
+
 import Input from '../Input';
 import RadioButton from '../RadioButton';
 import RemoveButton from '../RemoveButton';
@@ -60,7 +62,7 @@ class PhoneInput extends Component {
   }
 
   handleRemoveClick = () => {
- 
+
     this.setState(
       {
         ...this.state,
@@ -77,8 +79,8 @@ class PhoneInput extends Component {
     const { destroy } = this.state;
 
     return (!destroy &&
-      <div>
-        <div className="phones__item">
+      <div className="phone-input">
+        <div className="phone-input__inputs">
           <div className="phone">
             <Input
               value={code || ''}
@@ -92,10 +94,8 @@ class PhoneInput extends Component {
               placeholder="8888-8888"
               onChange={this.handleChangeNumber}
             />
-
             {showMainPhone && <RadioButton name="mainPhone" label="Principal" onChange={this.handleChangeMainPhone} />}
           </div>
-
           {showBtnDestroy && <RemoveButton onClick={this.handleRemoveClick} />}
         </div>
         {!valid && <p className="feedback-error">Por favor, informe o DDD e número</p>}
