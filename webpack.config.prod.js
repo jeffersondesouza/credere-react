@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const babiliPlugin = require('babili-webpack-plugin');
 
 const plugins = [];
-const API_URL = JSON.stringify('http://localhost:3000');
+const API_URL = JSON.stringify('https://credere-api-2.herokuapp.com');
 const APP_USER_TOKEN_KEY_PARAM = 'userToken';
 
 
@@ -22,6 +22,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   filename: 'index.html',
   inject: 'body'
 });
+
 
 plugins.push(
   new FontelloPlugin({
